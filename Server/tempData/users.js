@@ -1,4 +1,4 @@
-let users = [
+export const users = [
   {
     id: "u1",
     name: "ajay",
@@ -12,21 +12,5 @@ let users = [
     email: "abhinav@gmail.com",
     password: "1234",
     role: "user"
-  },
-  {
-    id: "u3",
-    name: "avinash",
-    email: "avinash@gmail.com",
-    password: "1234",
-    role: "farmer"
-  },
-  {
-    id: "u4",
-    name: "akshaya",
-    email: "akshaya@gmail.com",
-    password: "1234",
-    role: "farmer"
-  },
+  }
 ]
-
-module.exports = users;
