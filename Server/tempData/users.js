@@ -20,6 +20,13 @@ let users = [
     password: "1234",
     role: "farmer"
   },
+  {
+    id: "u4",
+    name: "akshaya",
+    email: "akshaya@gmail.com",
+    password: "1234",
+    role: "farmer"
+  },
 ]
 
 module.exports = users;
