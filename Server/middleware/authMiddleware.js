@@ -18,3 +18,13 @@ export const authenticate = (req, res, next) => {
     return res.status(401).json({ message: "Access denied. Invalid token." });
   }
 };
+
+export const authorize = (role) => {
+  return (req, res, next) => {
+    if(req.role === role) {
+      next();
+    } else {
+      return res.json({ message: "Unauthorized access" });
+    }
+  };
+};
