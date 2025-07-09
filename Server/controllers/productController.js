@@ -5,7 +5,7 @@ export const createProduct = async (req, res) => {
   try {
     const { name, category, description, price, quantity, image } = req.body;
     const product = await productModel.create(
-      { name, category, description, price, quantity, image, farmer: req.user.id, }
+      { name, category, description, price, quantity, image: req.file?.path, farmer: req.user.id, }
     );
     res.status(201).json({ message: "Product created successfully", product });
   } catch (error) {
