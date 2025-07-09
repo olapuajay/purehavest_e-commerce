@@ -13,14 +13,15 @@ import { authenticate, authorize } from "../middleware/authMiddleware.js";
 
 const Router = express.Router();
 
-
+// Product routes
 Router.get("/products", authenticate, authorize("admin"), getAllProducts);
 Router.patch("/products/:id/approve", authenticate, authorize("admin"), approveProduct);
 Router.patch("/products/:id/reject", authenticate, authorize("admin"), rejectProduct);
 Router.delete("/products/:id", authenticate, authorize("admin"), deleteProductByAdmin);
+
+// User routes
 Router.get("/users", authenticate, authorize("admin"), getAllUsers);
 Router.get("/users/:id", authenticate, authorize("admin"), getUserById);
 Router.delete("/users/:id", authenticate, authorize("admin"), deleteUserById);
-
 
 export default Router;

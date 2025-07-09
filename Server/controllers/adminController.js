@@ -1,4 +1,5 @@
 import productModel from "../models/Product.js";
+import userModel from "../models/User.js"; // Add this if not already present
 
 export const getAllProducts = async (req, res) => {
   try {
@@ -12,7 +13,7 @@ export const getAllProducts = async (req, res) => {
 export const approveProduct = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.id);
-    if(!product) return res.status(404).json({ message: "Product not found" });
+    if (!product) return res.status(404).json({ message: "Product not found" });
 
     product.status = "approved";
     await product.save();
@@ -26,7 +27,7 @@ export const approveProduct = async (req, res) => {
 export const rejectProduct = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.id);
-    if(!product) return res.status(404).json({ message: "Product not found" });
+    if (!product) return res.status(404).json({ message: "Product not found" });
 
     product.status = "rejected";
     await product.save();
@@ -40,7 +41,7 @@ export const rejectProduct = async (req, res) => {
 export const deleteProductByAdmin = async (req, res) => {
   try {
     const deleted = await productModel.findByIdAndDelete(req.params.id);
-    if(!deleted) return res.status(404).json({ message: "Product not found" });
+    if (!deleted) return res.status(404).json({ message: "Product not found" });
 
     res.json({ message: "Product deleted by admin" });
   } catch (error) {
@@ -49,14 +50,13 @@ export const deleteProductByAdmin = async (req, res) => {
   }
 };
 
-
+// Additional functions from your original branch
 
 // Get all users
 export const getAllUsers = async (req, res) => {
   try {
     const users = await userModel.find();
     res.status(200).json({ message: "Users List", users });
-    
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }
