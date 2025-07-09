@@ -19,7 +19,7 @@ const productSchema = mongoose.Schema(
     image: { type: String },
     status: {
       type: String, 
-      enum: ["pending"], 
+      enum: ["pending", "approved", "rejected"], 
       default: "pending"
     },
   }, { timestamps: true }
