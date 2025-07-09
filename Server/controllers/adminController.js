@@ -3,6 +3,10 @@ import userModel from "../models/User.js";
 import farmerModel from "../models/Farmer.js";
 import mongoose from "mongoose";
 
+// ==========================
+// Product Controller Section
+// ==========================
+
 export const getAllProducts = async (req, res) => {
   try {
     const products = await productModel.find().populate("farmer", "name email");
@@ -15,7 +19,7 @@ export const getAllProducts = async (req, res) => {
 export const approveProduct = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.id);
-    if(!product) return res.status(404).json({ message: "Product not found" });
+    if (!product) return res.status(404).json({ message: "Product not found" });
 
     product.status = "approved";
     await product.save();
@@ -29,7 +33,7 @@ export const approveProduct = async (req, res) => {
 export const rejectProduct = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.id);
-    if(!product) return res.status(404).json({ message: "Product not found" });
+    if (!product) return res.status(404).json({ message: "Product not found" });
 
     product.status = "rejected";
     await product.save();
@@ -43,7 +47,7 @@ export const rejectProduct = async (req, res) => {
 export const deleteProductByAdmin = async (req, res) => {
   try {
     const deleted = await productModel.findByIdAndDelete(req.params.id);
-    if(!deleted) return res.status(404).json({ message: "Product not found" });
+    if (!deleted) return res.status(404).json({ message: "Product not found" });
 
     res.json({ message: "Product deleted by admin" });
   } catch (error) {
@@ -52,23 +56,22 @@ export const deleteProductByAdmin = async (req, res) => {
   }
 };
 
+// ========================
+// User Controller Section
+// ========================
 
-
-// Get all users
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await userModel.find();
+    const users = await userModel.find().select("-password");
     res.status(200).json({ message: "Users List", users });
-    
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
 
-// Get a user by ID
 export const getUserById = async (req, res) => {
   try {
-    const user = await userModel.findById(req.params.id);
+    const user = await userModel.findById(req.params.id).select("-password");
     if (!user) return res.status(404).json({ message: "User not found" });
 
     res.status(200).json({ message: "User found", user });
@@ -77,7 +80,6 @@ export const getUserById = async (req, res) => {
   }
 };
 
-// Delete a user by ID
 export const deleteUserById = async (req, res) => {
   try {
     const deletedUser = await userModel.findByIdAndDelete(req.params.id);
@@ -89,19 +91,19 @@ export const deleteUserById = async (req, res) => {
   }
 };
 
-
-// farmer controller section
+// ==========================
+// Farmer Controller Section
+// ==========================
 
 export const getAllFarmers = async (req, res) => {
   try {
     const farmers = await farmerModel.find().select("-password");
     res.status(200).json({ message: "Farmers List", farmers });
   } catch (error) {
-    console.error("Error in getAllFarmers:", error.message);
+    console.error("❌ Error in getAllFarmers:", error.message);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
-
 
 export const getFarmerById = async (req, res) => {
   try {
@@ -123,7 +125,6 @@ export const getFarmerById = async (req, res) => {
   }
 };
 
-
 export const deleteFarmerById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -139,5 +140,3 @@ export const deleteFarmerById = async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
-
-
