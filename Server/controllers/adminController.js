@@ -1,4 +1,7 @@
 import productModel from "../models/Product.js";
+import userModel from "../models/User.js";
+import farmerModel from "../models/Farmer.js";
+import mongoose from "mongoose";
 
 export const getAllProducts = async (req, res) => {
   try {
@@ -85,3 +88,56 @@ export const deleteUserById = async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+
+// farmer controller section
+
+export const getAllFarmers = async (req, res) => {
+  try {
+    const farmers = await farmerModel.find().select("-password");
+    res.status(200).json({ message: "Farmers List", farmers });
+  } catch (error) {
+    console.error("Error in getAllFarmers:", error.message);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+
+export const getFarmerById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid farmer ID format" });
+    }
+
+    const farmer = await farmerModel.findById(id).select("-password");
+    if (!farmer) {
+      return res.status(404).json({ message: "Farmer not found" });
+    }
+
+    res.status(200).json({ message: "Farmer found", farmer });
+  } catch (error) {
+    console.error("❌ Error in getFarmerById:", error.message);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+
+export const deleteFarmerById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedFarmer = await farmerModel.findByIdAndDelete(id);
+    if (!deletedFarmer) {
+      return res.status(404).json({ message: "Farmer not found" });
+    }
+
+    res.status(200).json({ message: "Farmer deleted successfully" });
+  } catch (error) {
+    console.error("❌ Error in deleteFarmerById:", error.message);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+
