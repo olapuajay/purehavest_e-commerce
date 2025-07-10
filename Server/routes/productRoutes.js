@@ -3,11 +3,11 @@ import { createProduct, getMyProducts, updateProduct, deleteProduct } from '../c
 import { authenticate, authorize } from '../middleware/authMiddleware.js';
 import upload from '../middleware/upload.js';
 
-const router = express.Router();
+const Router = express.Router();
 
-router.post("/", authenticate, authorize("farmer"), upload.single('image'), createProduct);
-router.get("/", authenticate, authorize("farmer"), getMyProducts);
-router.patch("/:id", authenticate, authorize("farmer"), updateProduct);
-router.delete("/:id", authenticate, authorize("farmer"), deleteProduct);
+Router.post("/", authenticate, authorize("farmer"), upload.single('image'), createProduct);
+Router.get("/", authenticate, authorize("farmer"), getMyProducts);
+Router.patch("/:id", authenticate, authorize("farmer"), updateProduct);
+Router.delete("/:id", authenticate, authorize("farmer"), deleteProduct);
 
-export default router;
+export default Router;
