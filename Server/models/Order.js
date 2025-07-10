@@ -18,8 +18,17 @@ const orderSchema = new mongoose.Schema(
       },
     ],
     totalAmount: { type: Number, required: true },
-    status: { type: String, enum: ["confirmed", "shipped", "delivered"], default: "placed" },
+    status: { type: String, enum: ["confirmed", "shipped", "delivered"], default: "confirmed" },
     paymentStatus: { type: String, enum: ["pending", "paid", "failed"], default: "pending" },
+    shippingAddress: {
+      fullName: String,
+      phone: String,
+      street: String,
+      city: String,
+      state: String,
+      pincode: String,
+      country: String,
+    },
   }, { timestamps: true }
 );
 

@@ -1,12 +1,18 @@
 import orderModel from "../models/Order.js";
 import productModel from "../models/Product.js";
+import userModel from "../models/User.js";
 
 export const placeOrder = async (req, res) => {
   try {
     const { items, totalAmount } = req.body;
+    const user = await userModel.findById(req.user.id);
+    if(!user || !user.address) {
+      return res.status(400).json({ message: "User address not found" });
+    }
     const order = await orderModel.create({
       user: req.user.id,
       items, totalAmount,
+      shippingAddress: user.address,
     });
     res.status(201).json({ message: "Order placed", orderDetails: order });
   } catch (error) {
