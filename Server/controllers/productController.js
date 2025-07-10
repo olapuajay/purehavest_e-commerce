@@ -1,6 +1,5 @@
 import productModel from "../models/Product.js";
 
-
 export const createProduct = async (req, res) => {
   try {
     const { name, category, description, price, quantity, image } = req.body;
@@ -58,5 +57,29 @@ export const deleteProduct = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const getAllApprovedProducts = async (req, res) => {
+  try {
+    const products = await productModel.find({ status: "approved" }).populate("farmer", "name email");
+    res.status(200).json({ message: "All approved products", products });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to fetch products" });
+  }
+};
+
+export const getProductById = async (req, res) => {
+  try {
+    const product = await productModel.findById(req.params.id).populate("farmer", "name email");
+
+    if(!product || product.status !== "approved") {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.status(200).json({ message: "Product details", product });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error fetching products" });
   }
 };
