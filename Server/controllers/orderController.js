@@ -62,6 +62,22 @@ export const getAllOrders = async (req, res) => {
   }
 };
 
+export const getOrderById = async (req, res) => {
+  try {
+    const order = await orderModel
+      .findById(req.params.id)
+      .populate("user", "name email")
+      .populate("items.product", "name category");
+
+    if(!order) return res.status(404).json({ message: "Order not found" });
+
+    res.json({ message: "Order fetched", order });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to fetch order" });
+  }
+}
+
 export const updateOrderStatus = async (req, res) => {
   try {
     const { status } = req.body;
@@ -96,5 +112,41 @@ export const markOrderAsPaid = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Failed to update payment status" });
+  }
+};
+
+export const cancelOrder = async (req, res) => {
+  try {
+    const order = await orderModel.findOne(
+      { _id: req.params.id, user: req.user.id }
+    );
+    if(!order) return res.status(404).json({ message: "Order not found" });
+    if(order.status !== "confirmed") {
+      return res.status(400).json({ message: "Cannot cancel after shipped" });
+    }
+    order.canceled = true;
+    await order.save();
+
+    res.status(200).json({ message: "Order cancelled successfully", order });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to cancel order" });
+  }
+};
+
+export const requestReturn = async (req, res) => {
+  try {
+    const order = await orderModel.findOne(
+      { _id: req.params.id, user: req.user.id, }
+    );
+    if(!order) return res.status(404).json({ message: "Order not found" });
+    if(order.status !== "delivered") return res.status(400).json({ message: "Return allowed after delivery only" });
+    order.returnRequested = true;
+    await order.save();
+
+    res.status(200).json({ message: "Return requested", order });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to request return" });
   }
 };

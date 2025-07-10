@@ -29,6 +29,8 @@ const orderSchema = new mongoose.Schema(
       pincode: String,
       country: String,
     },
+    canceled: { type: Boolean, default: false },
+    returnRequested: { type: Boolean, default: false },
   }, { timestamps: true }
 );
 
