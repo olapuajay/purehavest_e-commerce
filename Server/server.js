@@ -8,6 +8,7 @@ import farmerRoutes from './routes/farmerRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import adminRoutes from './routes/adminRoutes.js';
 import publicProductRoutes from './routes/publicProductRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 
 connectDB();
@@ -20,6 +21,7 @@ app.use("/api/farmers", farmerRoutes);
 app.use("/api/farmers/products", productRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/products", publicProductRoutes);
+app.use("/api/orders", orderRoutes);
 
 const port = process.env.PORT || 8001;
 
