@@ -3,15 +3,12 @@ import userModel from "../models/User.js";
 import farmerModel from "../models/Farmer.js";
 import mongoose from "mongoose";
 
-// ==========================
-// Product Controller Section
-// ==========================
-
 export const getAllProducts = async (req, res) => {
   try {
     const products = await productModel.find().populate("farmer", "name email");
     res.json({ message: "Products List", products });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -26,6 +23,7 @@ export const approveProduct = async (req, res) => {
 
     res.status(200).json({ message: "Product approved successfully" });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -40,6 +38,7 @@ export const rejectProduct = async (req, res) => {
 
     res.status(200).json({ message: "Product rejected" });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -56,26 +55,24 @@ export const deleteProductByAdmin = async (req, res) => {
   }
 };
 
-// ========================
-// User Controller Section
-// ========================
-
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await userModel.find().select("-password");
+    const users = await userModel.find();
     res.status(200).json({ message: "Users List", users });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
 
 export const getUserById = async (req, res) => {
   try {
-    const user = await userModel.findById(req.params.id).select("-password");
+    const user = await userModel.findById(req.params.id);
     if (!user) return res.status(404).json({ message: "User not found" });
 
     res.status(200).json({ message: "User found", user });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -87,20 +84,17 @@ export const deleteUserById = async (req, res) => {
 
     res.json({ message: "User deleted successfully" });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
-
-// ==========================
-// Farmer Controller Section
-// ==========================
 
 export const getAllFarmers = async (req, res) => {
   try {
     const farmers = await farmerModel.find().select("-password");
     res.status(200).json({ message: "Farmers List", farmers });
   } catch (error) {
-    console.error("❌ Error in getAllFarmers:", error.message);
+    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -120,7 +114,7 @@ export const getFarmerById = async (req, res) => {
 
     res.status(200).json({ message: "Farmer found", farmer });
   } catch (error) {
-    console.error("❌ Error in getFarmerById:", error.message);
+    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -136,7 +130,7 @@ export const deleteFarmerById = async (req, res) => {
 
     res.status(200).json({ message: "Farmer deleted successfully" });
   } catch (error) {
-    console.error("❌ Error in deleteFarmerById:", error.message);
+    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };

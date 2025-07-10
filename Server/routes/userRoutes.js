@@ -2,11 +2,11 @@ import express from 'express';
 import { loginUser, registerUser, profile, updateProfile } from '../controllers/userController.js';
 import { authenticate } from '../middleware/authMiddleware.js';
 
-const router = express.Router();
+const Router = express.Router();
 
-router.post("/register", registerUser);
-router.post("/login", loginUser);
-router.get("/profile", authenticate, profile);
-router.patch("/updateprofile", authenticate, updateProfile);
+Router.post("/register", registerUser);
+Router.post("/login", loginUser);
+Router.get("/profile", authenticate, profile);
+Router.patch("/updateprofile", authenticate, updateProfile);
 
-export default router;
+export default Router;
