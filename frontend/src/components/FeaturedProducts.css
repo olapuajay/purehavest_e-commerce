@@ -1,0 +1,39 @@
+.featured-section {
+  padding: 2rem;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.featured-heading {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.featured-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.featured-left {
+  flex: 1 1 300px;
+}
+
+.featured-right {
+  flex: 1 1 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.featured-img {
+  width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.tall-img {
+  height: 100%;
+}
