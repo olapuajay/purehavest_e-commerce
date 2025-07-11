@@ -1,0 +1,55 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ccc;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 40px;
+  padding: 0.5rem 1rem;
+  width: 750px;
+  background-color: white;
+}
+
+.search-container input {
+  border: none;
+  outline: none;
+  margin-left: 0.5rem;
+  width: 100%;
+  color: gray;
+}
+
+.search-icon {
+  color: black;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.signup-btn {
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 3rem;
+  cursor: pointer;
+}
