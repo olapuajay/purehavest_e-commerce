@@ -85,3 +85,19 @@ export const updateProfile = async (req, res) => {
     res.status(500).json({ message: "something went wrong" });
   }
 };
+
+export const updateAddress = async (req, res) => {
+  try {
+    const { fullName, phone, street, city, state, pincode, country } = req.body;
+
+    const user = await userModel.findOne({ email: req.user.email });
+
+    user.address = { fullName, phone, street, city, state, pincode, country };
+    await user.save();
+
+    res.status(200).json({ message: "Address updated successfully", address: user.address });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to update address" });
+  }
+};

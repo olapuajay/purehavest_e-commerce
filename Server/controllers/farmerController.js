@@ -1,6 +1,8 @@
 import farmerModel from "../models/Farmer.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import productModel from "../models/Product.js";
+import orderModel from "../models/Order.js";
 
 export const registerFarmer = async (req, res) => {
   try {
@@ -76,5 +78,30 @@ export const updateProfile = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const farmerStats = async (req, res) => {
+  try {
+    const totalProducts = await productModel.countDocuments({ farmer: req.user.id });
+
+    const orders = await orderModel.find({ "items.product": { $exits: true } }).populate("items.product");
+
+    let totalOrders = 0;
+    let totalRevenue = 0;
+
+    orders.forEach(order => {
+      order.items.forEach(item => {
+        if(item.product?.farmer?.toString() === req.user.id) {
+          totalOrders += 1;
+          totalRevenue += item.product.price * item.product.quantity;
+        }
+      });
+    });
+
+    res.status(200).json({ totalProducts, totalOrders, totalRevenue, });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to fetch farmer stats" });
   }
 };
