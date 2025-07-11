@@ -136,17 +136,55 @@ export const cancelOrder = async (req, res) => {
 
 export const requestReturn = async (req, res) => {
   try {
+    const { reason } = req.body;
     const order = await orderModel.findOne(
       { _id: req.params.id, user: req.user.id, }
     );
     if(!order) return res.status(404).json({ message: "Order not found" });
     if(order.status !== "delivered") return res.status(400).json({ message: "Return allowed after delivery only" });
     order.returnRequested = true;
+    order.returnReason = reason || "No reason provided";
+    order.returnStatus = "pending";
+    
     await order.save();
 
     res.status(200).json({ message: "Return requested", order });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Failed to request return" });
+  }
+};
+
+export const handleReturnRequest = async (req, res) => {
+  try {
+    const { status, note } = req.body;
+    const validStatus = ["approved", "rejected"];
+
+    if(!validStatus.includes(status)) return res.status(400).json({ message: "Invalid return status" });
+    const order = await orderModel.findById(req.params.id);
+    if(!order || !order.returnRequested) return res.status(404).json({ message: "No return request found" });
+
+    order.returnStatus = status;
+    order.returnNote = status === "rejected" ? note || "No reason provided" : "";
+    await order.save();
+
+    res.status(200).json({ message: `Return ${status}`, order });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to process return request" });
+  }
+};
+
+export const getAllReturnRequests = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({ returnRequested: true })
+      .populate("user", "name email")
+      .populate("items.product", "name category image");
+
+    res.status(200).json({ message: "All return requests fetched", returnRequests: orders });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to fetch return requests" });
   }
 };

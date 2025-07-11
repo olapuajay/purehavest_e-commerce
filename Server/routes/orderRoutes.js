@@ -1,6 +1,6 @@
 import express from "express";
 import { authenticate, authorize } from "../middleware/authMiddleware.js";
-import { placeOrder, getUserOrders, getFarmerOrders, getAllOrders, updateOrderStatus, markOrderAsPaid, getOrderById, cancelOrder, requestReturn } from "../controllers/orderController.js";
+import { placeOrder, getUserOrders, getFarmerOrders, getAllOrders, updateOrderStatus, markOrderAsPaid, getOrderById, cancelOrder, requestReturn, handleReturnRequest, getAllReturnRequests } from "../controllers/orderController.js";
 
 const Router = express.Router();
 
@@ -17,5 +17,7 @@ Router.patch("/:id/pay", authenticate, markOrderAsPaid);
 
 Router.patch("/cancel/:id", authenticate, authorize("user"), cancelOrder);
 Router.patch("/return/:id", authenticate, authorize("user"), requestReturn);
+Router.patch("/return/handle/:id", authenticate, authorize("admin"), handleReturnRequest);
+Router.get("/return/all", authenticate, authorize("admin"), getAllReturnRequests);
 
 export default Router;

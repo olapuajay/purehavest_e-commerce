@@ -31,6 +31,9 @@ const orderSchema = new mongoose.Schema(
     },
     canceled: { type: Boolean, default: false },
     returnRequested: { type: Boolean, default: false },
+    returnReason: { type: String, default: "" },
+    returnStatus: { type: String, enum: ["pending", "approved", "rejected", null], default: null, },
+    returnNote: { type: String, default: "" },
   }, { timestamps: true }
 );
 
