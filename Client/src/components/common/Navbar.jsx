@@ -51,21 +51,15 @@ function Navbar() {
         {!isAuthenticated ? (
           <>
             <button
-              onClick={() => navigate("/signup")}
-              className="bg-green-600 text-white border-none rounded-lg px-8 py-2"
-            >
-              Sign Up
-            </button>
-            <button
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/register")}
               className="border border-green-600 text-green-600 rounded-lg px-8 py-2"
             >
-              Login
+              Sign Up
             </button>
           </>
         ) : (
           <>
-            <span className="font-medium">Welcome, {user?.name}</span>
+            <span className="font-medium">Welcome, {user?.name.split(" ")[0]}</span>
             <button
               onClick={handleLogout}
               className="text-red-600 font-semibold border border-red-500 px-4 py-1 rounded"

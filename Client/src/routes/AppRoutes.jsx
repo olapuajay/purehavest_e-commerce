@@ -38,7 +38,7 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      <Route element={<ProtectedRoute />}>
+      <Route element={<ProtectedRoute allowedRoles={['user']} />}>
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
@@ -48,7 +48,7 @@ function AppRoutes() {
         <Route path="/invoice/:id" element={<Invoice />} />
       </Route>
 
-      <Route element={<RoleGaurd role="farmer" />}>
+      <Route element={<ProtectedRoute allowedRoles={['farmer']} />}>
         <Route path="/farmer/dashboard" element={<FarmerDashboard />} />
         <Route path="/farmer/add-product" element={<AddProduct />} />
         <Route path="/farmer/my-products" element={<MyProducts />} />
@@ -56,7 +56,7 @@ function AppRoutes() {
         <Route path="/farmer/profile" element={<FarmerProfile />} />
       </Route>
 
-      <Route element={<RoleGaurd role="admin" />}>
+      <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/farmers" element={<Farmers />} />

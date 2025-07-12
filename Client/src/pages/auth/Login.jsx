@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -18,11 +18,10 @@ function Login() {
       const endpoint =
         role === 'farmer'
           ? `${API}/farmers/login`
-          : role === 'admin'
-          ? `${API}/admin/login`
           : `${API}/users/login`;
 
       const res = await axios.post(endpoint, { email, password });
+      console.log("Login Response:", res.data); // 🔍 Add this line to inspect
 
       login(res.data.user, res.data.token);
 
@@ -31,7 +30,7 @@ function Login() {
       else if (res.data.user.role === 'farmer') navigate('/farmer/dashboard');
       else {
         setTimeout(() => {
-          navigate('/profile');
+          navigate('/');
         }, 2000);
       }
     } catch (error) {
@@ -75,6 +74,9 @@ function Login() {
       >
         Login
       </button>
+      <p className="mt-4 text-center">
+        Don’t have an account? <Link to="/register" className="text-blue-600 underline">Register</Link>
+      </p>
     </div>
   );
 }

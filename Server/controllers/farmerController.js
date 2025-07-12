@@ -32,11 +32,11 @@ export const loginFarmer = async (req, res) => {
     if(existingFarmer) {
       const isMatch = await bcrypt.compare(password, existingFarmer.password);
       if(isMatch) {
-        const farmerObj = {
+        const userObj = {
           id: existingFarmer._id, name: existingFarmer.name, email: existingFarmer.email, role: existingFarmer.role
         }
-        const token = jwt.sign(farmerObj, process.env.JWT_SECRET, { expiresIn: '1d' });
-        res.status(200).json({ message: "Logged-in successfully", farmer: farmerObj, token });
+        const token = jwt.sign(userObj, process.env.JWT_SECRET, { expiresIn: '1d' });
+        res.status(200).json({ message: "Logged-in successfully", user: userObj, token });
       } else {
         res.status(400).json({ message: "Invalid password" });
       }
