@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaPlus, FaBoxOpen, FaClipboardList, FaUser, FaSignInAlt } from 'react-icons/fa';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from '../../../components/contexts/AuthContext';
 
 function Sidebar() {
   const [profile, setProfile] = useState(null);

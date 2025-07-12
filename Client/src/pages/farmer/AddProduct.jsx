@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../components/contexts/AuthContext'
 
 const categories = [
   "Dairy", "Cereals", "Grains", "Vegetables", "Fruits", "Spices", "Dryfruits", "Meat",

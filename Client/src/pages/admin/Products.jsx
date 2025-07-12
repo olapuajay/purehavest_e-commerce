@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Farmers() {
+function Products() {
   return (
     <div>
-      Farmers
+      Products
     </div>
   )
 }
 
-export default Farmers
+export default Products

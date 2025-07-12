@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Farmers() {
+function Sidebar() {
   return (
     <div>
-      Farmers
+      Sidebar
     </div>
   )
 }
 
-export default Farmers
+export default Sidebar

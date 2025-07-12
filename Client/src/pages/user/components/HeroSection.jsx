@@ -1,6 +1,6 @@
 import React from 'react';
-import heroImage from '../../assets/hero-img.png';
-import bgImage from '../../assets/leaves.png';
+import heroImage from '../../../assets/hero-img.png';
+import bgImage from '../../../assets/leaves.png';
 
 function HeroSection() {
   return (

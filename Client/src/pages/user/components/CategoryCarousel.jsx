@@ -1,12 +1,12 @@
 import React from 'react';
 
-import fruitsImg from '../../assets/fruits.png';
-import vegetablesImg from '../../assets/vegetables.png';
-import dryFruitsImg from '../../assets/dryfruits.png';
-import dairyImg from '../../assets/dairy.png';
-import cerealsImg from '../../assets/cereals.png';
-import meatImg from '../../assets/meat.png';
-import spicesImg from '../../assets/spices.png';
+import fruitsImg from '../../../assets/fruits.png';
+import vegetablesImg from '../../../assets/vegetables.png';
+import dryFruitsImg from '../../../assets/dryfruits.png';
+import dairyImg from '../../../assets/dairy.png';
+import cerealsImg from '../../../assets/cereals.png';
+import meatImg from '../../../assets/meat.png';
+import spicesImg from '../../../assets/spices.png';
 
 const categories = [
   { name: 'Fruits', image: fruitsImg },

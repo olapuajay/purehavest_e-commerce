@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../components/contexts/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
@@ -25,7 +25,7 @@ function Login() {
 
       login(res.data.user, res.data.token);
 
-      if (res.data.user.role === 'admin') navigate('/admin/dashboard');
+      if (res.data.user.role === 'admin') navigate('/admin');
       else if (res.data.user.role === 'farmer') navigate('/farmer');
       else {
         setTimeout(() => {

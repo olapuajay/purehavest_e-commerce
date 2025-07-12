@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaSearch, FaShoppingCart, FaUser, FaBars, FaTimes } from 'react-icons/fa';
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
@@ -97,14 +97,12 @@ function Navbar() {
               <span className="font-medium hidden sm:inline-block">
                 Welcome, {user?.name.split(" ")[0]}
               </span>
-              {user?.role === "user" && (
-                <button
-                  onClick={handleLogout}
-                  className="text-red-600 font-semibold border border-red-500 px-4 py-1 rounded"
-                >
-                  Logout
-                </button>
-              )}
+              <button
+                onClick={handleLogout}
+                className="text-red-600 font-semibold border border-red-500 px-4 py-1 rounded hover:bg-red-50 cursor-pointer"
+              >
+                Logout
+              </button>
             </>
           )}
         </div>

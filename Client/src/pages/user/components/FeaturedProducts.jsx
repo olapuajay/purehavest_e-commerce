@@ -1,7 +1,7 @@
 import React from 'react';
-import honeyImg from '../../assets/honey.png';
-import milkImg from '../../assets/milk.png';
-import oilImg from '../../assets/oil.png';
+import honeyImg from '../../../assets/honey.png';
+import milkImg from '../../../assets/milk.png';
+import oilImg from '../../../assets/oil.png';
 
 const FeaturedProducts = () => {
   return (

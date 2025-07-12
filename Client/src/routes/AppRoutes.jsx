@@ -29,6 +29,7 @@ import AdminOrders from "../pages/admin/Orders";
 import Returns from "../pages/admin/Returns";
 
 import ProtectedRoute from "../components/common/ProtectedRoute";
+import FarmerDetails from "../pages/admin/FarmerDetails";
 
 function AppRoutes() {
   return (
@@ -58,11 +59,14 @@ function AppRoutes() {
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/users" element={<Users />} />
-        <Route path="/admin/farmers" element={<Farmers />} />
-        <Route path="/admin/orders" element={<AdminOrders />} />
-        <Route path="/admin/returns" element={<Returns />} />
+        <Route path="/admin" element={<AdminDashboard />}>
+          <Route path="products" element={<Products />} />
+          <Route path="users" element={<Users />} />
+          <Route path="farmers" element={<Farmers />} />
+          <Route path="farmers/:id" element={<FarmerDetails />} />
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="returns" element={<Returns />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

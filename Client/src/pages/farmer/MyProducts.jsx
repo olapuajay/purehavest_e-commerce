@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../components/contexts/AuthContext';
 import { FaAudioDescription } from 'react-icons/fa';
 
 function MyProducts() {

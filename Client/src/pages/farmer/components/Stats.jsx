@@ -1,7 +1,7 @@
 // pages/farmer/components/Stats.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../components/contexts/AuthContext";
 
 function Stats() {
   const { token } = useAuth();
