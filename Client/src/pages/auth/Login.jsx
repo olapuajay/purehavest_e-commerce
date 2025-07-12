@@ -21,13 +21,12 @@ function Login() {
           : `${API}/users/login`;
 
       const res = await axios.post(endpoint, { email, password });
-      console.log("Login Response:", res.data); // 🔍 Add this line to inspect
+      console.log("Login Response:", res.data);
 
       login(res.data.user, res.data.token);
 
-      // Navigate based on role
       if (res.data.user.role === 'admin') navigate('/admin/dashboard');
-      else if (res.data.user.role === 'farmer') navigate('/farmer/dashboard');
+      else if (res.data.user.role === 'farmer') navigate('/farmer');
       else {
         setTimeout(() => {
           navigate('/');

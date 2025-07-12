@@ -49,11 +49,13 @@ function AppRoutes() {
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={['farmer']} />}>
-        <Route path="/farmer/dashboard" element={<FarmerDashboard />} />
-        <Route path="/farmer/add-product" element={<AddProduct />} />
-        <Route path="/farmer/my-products" element={<MyProducts />} />
-        <Route path="/farmer/orders" element={<FarmerOrders />} />
-        <Route path="/farmer/profile" element={<FarmerProfile />} />
+        <Route path="/farmer" element={<FarmerDashboard />}>
+          <Route index element={<AddProduct />} />
+          <Route path="add-product" element={<AddProduct />} />
+          <Route path="my-products" element={<MyProducts />} />
+          <Route path="orders" element={<FarmerOrders />} />
+          <Route path="profile" element={<FarmerProfile />} />
+        </Route>
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>

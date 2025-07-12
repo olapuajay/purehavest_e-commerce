@@ -7,7 +7,7 @@ const Router = express.Router();
 
 Router.post("/", authenticate, authorize("farmer"), upload.single('image'), createProduct);
 Router.get("/", authenticate, authorize("farmer"), getMyProducts);
-Router.patch("/:id", authenticate, authorize("farmer"), updateProduct);
+Router.patch("/:id", authenticate, authorize("farmer"), upload.single("image"), updateProduct);
 Router.delete("/:id", authenticate, authorize("farmer"), deleteProduct);
 
 export default Router;

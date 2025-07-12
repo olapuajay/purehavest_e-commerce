@@ -25,7 +25,8 @@ export const getMyProducts = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   try {
-    const { name, category, description, price, quantity, image } = req.body;
+    const { name, category, description, price, quantity } = req.body;
+    const image = req.file?.path;
     const product = await productModel.findOne({ _id: req.params.id, farmer: req.user.id });
     if(!product) {
       return res.status(404).json({ message: "Product not found" });

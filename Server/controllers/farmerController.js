@@ -85,7 +85,7 @@ export const farmerStats = async (req, res) => {
   try {
     const totalProducts = await productModel.countDocuments({ farmer: req.user.id });
 
-    const orders = await orderModel.find({ "items.product": { $exits: true } }).populate("items.product");
+    const orders = await orderModel.find({ "items.product": { $exists: true } }).populate("items.product");
 
     let totalOrders = 0;
     let totalRevenue = 0;

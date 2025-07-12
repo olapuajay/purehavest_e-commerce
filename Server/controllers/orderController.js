@@ -39,7 +39,7 @@ export const getFarmerOrders = async (req, res) => {
     const orders = await orderModel
       .find({ "items.product": { $in: productIds } })
       .populate("user", "name email")
-      .populate("items.product", "name email");
+      .populate("items.product");
 
     res.status(200).json({ message: "Total Orders", orders });
   } catch (error) {
