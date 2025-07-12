@@ -6,6 +6,7 @@ const farmerSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, required: true, default: "farmer" },
+    avatar: { type: String, default: "", }
   }, { timestamps: true }
 );
 

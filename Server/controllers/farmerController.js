@@ -66,15 +66,21 @@ export const updateProfile = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const farmer = await farmerModel.findOne({ email: req.user.email });
-    if(farmer) farmer.name = name;
+    if(!farmer) return res.status(404).json({ message: "Farmer not found" });
+
+    if(name) farmer.name = name;
     if(email) farmer.email = email;
     if(password) {
       const hashedPassword = await bcrypt.hash(password, 10);
       farmer.password = hashedPassword;
     }
+
+    if(req.file) {
+      farmer.avatar = req.file.path;
+    }
     const updatedFarmer = await farmer.save();
 
-    res.json({ message: "Profile updated successfully", name: updatedFarmer.name, email: updatedFarmer.email, role: updatedFarmer.role });
+    res.json({ message: "Profile updated successfully", name: updatedFarmer.name, email: updatedFarmer.email, avatar: updatedFarmer.avatar });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Something went wrong" });
