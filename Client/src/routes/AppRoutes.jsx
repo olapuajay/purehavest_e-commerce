@@ -29,7 +29,6 @@ import AdminOrders from "../pages/admin/Orders";
 import Returns from "../pages/admin/Returns";
 
 import ProtectedRoute from "../components/common/ProtectedRoute";
-import RoleGaurd from "../components/common/RoleGaurd";
 
 function AppRoutes() {
   return (

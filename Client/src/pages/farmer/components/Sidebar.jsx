@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { FaPlus, FaBoxOpen, FaClipboardList, FaUser } from 'react-icons/fa';
+import { FaPlus, FaBoxOpen, FaClipboardList, FaUser, FaSignInAlt } from 'react-icons/fa';
+import { useAuth } from '../../../contexts/AuthContext';
 
 function Sidebar() {
   const [profile, setProfile] = useState(null);
   const token = localStorage.getItem('token');
   const API = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
+  const { logout } = useAuth();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -21,6 +24,11 @@ function Sidebar() {
     };
     fetchProfile();
   }, [token]);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  }
 
   const linkClasses = ({ isActive }) =>
     `flex items-center gap-3 px-4 py-2 rounded hover:bg-green-100 ${
@@ -57,6 +65,12 @@ function Sidebar() {
         <NavLink to="/farmer/profile" className={linkClasses}>
           <FaUser /> Profile
         </NavLink>
+
+        <div className='mt-10 border-t pt-4'>
+          <button onClick={handleLogout} className='w-full flex items-center gap-3 px-4 py-2 rounded hover:bg-red-100 text-red-600 hover:cursor-pointer'>
+            <FaSignInAlt /> Logout
+          </button>
+        </div>
       </nav>
     </aside>
   );
