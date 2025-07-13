@@ -12,12 +12,24 @@ import {
   deleteFarmerById,
 } from "../controllers/adminController.js";
 import { authenticate, authorize } from "../middleware/authMiddleware.js";
+import productModel from "../models/Product.js";
 
 const Router = express.Router();
 
 Router.get("/profile", authenticate, authorize("admin"), (req, res) => {
   const { name, email } = req.user;
   res.json({ admin: { name, email } });
+});
+
+Router.get("/farmer/:id/products", authenticate, authorize("admin"), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const products = await productModel.find({ farmer: id });
+    res.json({ products });
+  } catch (error) {
+    console.log("Error: ", error);
+    res.status(500).json({ message: 'Failed to fetch products' });
+  }
 });
 
 // Product routes

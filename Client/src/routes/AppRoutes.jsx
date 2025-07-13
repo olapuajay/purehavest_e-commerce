@@ -25,6 +25,7 @@ import FarmerProfile from "../pages/farmer/Profile";
 import AdminDashboard from "../pages/admin/Dashboard";
 import Users from "../pages/admin/Users";
 import Farmers from "../pages/admin/Farmers";
+import FarmerProducts from "../pages/admin/FarmerProducts"
 import AdminOrders from "../pages/admin/Orders";
 import Returns from "../pages/admin/Returns";
 
@@ -62,7 +63,7 @@ function AppRoutes() {
         <Route path="/admin" element={<AdminDashboard />}>
           <Route path="farmers" element={<Farmers />} />
           <Route path="farmers/:id" element={<FarmerDetails />} />
-          <Route path="products" element={<Products />} />
+          <Route path="farmers/:id/products" element={<FarmerProducts />} />
           <Route path="users" element={<Users />} />
           <Route path="orders" element={<AdminOrders />} />
           <Route path="returns" element={<Returns />} />
