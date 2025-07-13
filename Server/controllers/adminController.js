@@ -1,6 +1,7 @@
 import productModel from "../models/Product.js";
 import userModel from "../models/User.js";
 import farmerModel from "../models/Farmer.js";
+import orderModel from "../models/Order.js";
 import mongoose from "mongoose";
 
 export const getAllProducts = async (req, res) => {
@@ -85,6 +86,17 @@ export const deleteUserById = async (req, res) => {
     res.json({ message: "User deleted successfully" });
   } catch (error) {
     console.log(error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const getUserOrdersByAdmin = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const orders = await orderModel.find({ user: userId }).populate("items.product", "name price status");
+    res.status(200).json({ message: "User orders", orders });
+  } catch (error) {
+    console.error("Failed to fetch user orders", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };

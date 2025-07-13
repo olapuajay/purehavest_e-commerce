@@ -10,6 +10,7 @@ import {
   getAllFarmers,
   getFarmerById,
   deleteFarmerById,
+  getUserOrdersByAdmin
 } from "../controllers/adminController.js";
 import { authenticate, authorize } from "../middleware/authMiddleware.js";
 import productModel from "../models/Product.js";
@@ -42,6 +43,7 @@ Router.delete("/products/:id", authenticate, authorize("admin"), deleteProductBy
 Router.get("/allusers", authenticate, authorize("admin"), getAllUsers);
 Router.get("/allusers/:id", authenticate, authorize("admin"), getUserById);
 Router.delete("/allusers/:id", authenticate, authorize("admin"), deleteUserById);
+Router.get('/user/:id/orders', authenticate, authorize("admin"), getUserOrdersByAdmin);
 
 // Farmer routes
 Router.get("/allfarmers", authenticate, authorize("admin"), getAllFarmers);

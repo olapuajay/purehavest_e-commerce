@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaUsers, FaBoxOpen, FaUserShield, FaClipboardList, FaSignOutAlt, FaBars, FaTimes } from 'react-icons/fa';
+import { FaUsers, FaBoxOpen, FaUserShield, FaClipboardList, FaSignOutAlt, FaBars, FaTimes, FaUndoAlt } from 'react-icons/fa';
 import { useAuth } from '../../../components/contexts/AuthContext';
 import admin_logo from '../../../assets/admin.png';
 import axios from 'axios';
@@ -70,6 +70,10 @@ function Sidebar() {
 
           <NavLink to="/admin/orders" onClick={toggleSideBar} className={linkClasses}>
             <FaClipboardList /> Orders
+          </NavLink>
+
+          <NavLink to="/admin/returns" onClick={toggleSideBar} className={linkClasses}>
+            <FaUndoAlt /> Returns
           </NavLink>
 
           <div className='mt-4 border-t pt-2'>
