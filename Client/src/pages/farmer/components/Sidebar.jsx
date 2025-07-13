@@ -7,8 +7,8 @@ import {
   FaClipboardList,
   FaUser,
   FaSignOutAlt,
-  FaBars,
   FaTimes,
+  FaChevronRight
 } from 'react-icons/fa';
 import { useAuth } from '../../../components/contexts/AuthContext';
 import user_logo from "../../../assets/user.png"
@@ -50,9 +50,9 @@ function Sidebar() {
   return (
     <>
       {/* Mobile Toggle Button */}
-      <div className="md:hidden fixed top-4 right-4 z-50">
+      <div className="md:hidden fixed z-50">
         <button onClick={toggleSideBar} className="text-2xl text-green-800">
-          {isOpen ? <FaTimes /> : <FaBars />}
+          {isOpen ? <FaTimes /> : <FaChevronRight />}
         </button>
       </div>
 

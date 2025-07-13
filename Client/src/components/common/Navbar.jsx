@@ -27,8 +27,8 @@ function Navbar() {
   const handleCartClick = () => {
     if (!isAuthenticated || user?.role !== "user") return navigate("/login");
 
-      navigate("/cart");
-      setMenuOpen(false);
+    navigate("/cart");
+    setMenuOpen(false);
   };
 
   const toggleMenu = () => {
@@ -39,7 +39,7 @@ function Navbar() {
   const isGuest = !user;
 
   return (
-    <nav className="bg-white border-b border-gray-300 px-4 md:px-8 py-4 sticky">
+    <nav className="bg-white border-b border-gray-300 px-4 md:px-8 py-4 fixed top-0 left-0 right-0 z-50 w-full">
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div 
@@ -53,7 +53,7 @@ function Navbar() {
         </div>
 
         {/* Hamburger Icon */}
-        {(isUser || isGuest) && (  
+        {(isUser || isGuest || isAuthenticated) && (
           <div className="md:hidden text-2xl cursor-pointer" onClick={toggleMenu}>
             {menuOpen ? <FaTimes /> : <FaBars />}
           </div>
@@ -94,8 +94,8 @@ function Navbar() {
             </button>
           ) : (
             <>
-              <span className="font-medium sm:inline-block">
-                Welcome, {user?.name.split(" ")[0]}
+              <span className="font-medium sm:inline-block capitalize">
+                Welcome, {user?.name?.split(" ")[0]}
               </span>
               <button
                 onClick={handleLogout}
@@ -133,15 +133,14 @@ function Navbar() {
             </div>
           )}
 
-          {(isUser || isGuest) && (
-            <div 
-              className="flex items-center gap-2 cursor-pointer"
-              onClick={handleUserRedirect}
-            >
-              <FaUser className="text-xl" />
-              <span>Account</span>
-            </div>
-          )}
+          {/* Account/Profile Link */}
+          <div 
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={handleUserRedirect}
+          >
+            <FaUser className="text-xl" />
+            <span>Account</span>
+          </div>
 
           {!isAuthenticated ? (
             <button
@@ -154,19 +153,17 @@ function Navbar() {
               Sign Up
             </button>
           ) : (
-            isUser && (
-              <div className="flex flex-col items-start gap-2">
-                <span className="font-medium">
-                  Welcome, {user?.name.split(" ")[0]}
-                </span>
-                <button
-                  onClick={handleLogout}
-                  className="text-red-600 font-semibold border border-red-500 px-4 py-1 rounded"
-                >
-                  Logout
-                </button>
-              </div>
-            )
+            <div className="flex flex-col items-start gap-2">
+              <span className="font-medium capitalize">
+                Welcome, {user?.name?.split(" ")[0]}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="text-red-600 font-semibold border border-red-500 px-4 py-1 rounded"
+              >
+                Logout
+              </button>
+            </div>
           )}
         </div>
       )}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaUsers, FaBoxOpen, FaUserShield, FaClipboardList, FaSignOutAlt, FaBars, FaTimes, FaUndoAlt } from 'react-icons/fa';
+import { FaUsers, FaBoxOpen, FaUserShield, FaClipboardList, FaSignOutAlt, FaBars, FaTimes, FaUndoAlt, FaChevronRight } from 'react-icons/fa';
 import { useAuth } from '../../../components/contexts/AuthContext';
 import admin_logo from '../../../assets/admin.png';
 import axios from 'axios';
@@ -40,9 +40,9 @@ function Sidebar() {
   
   return (
     <>
-      <div className='md:hidden fixed top-4 right-4 z-50'>
+      <div className='md:hidden fixed z-50'>
         <button onClick={toggleSideBar} className='text-2xl text-green-800'>
-          {isOpen ? <FaTimes /> : <FaBars />}
+          {isOpen ? <FaTimes /> : <FaChevronRight />}
         </button>
       </div>
 
