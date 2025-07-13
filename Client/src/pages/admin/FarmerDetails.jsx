@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import user_logo from "../../assets/user.png"
 
 function FarmerDetails() {
   const { id } = useParams();
@@ -29,7 +30,7 @@ function FarmerDetails() {
     <div className='p-4 max-w-2xl mx-auto'>
       <h1 className='text-2xl font-bold mb-4'>Farmer Details</h1>
       <div className='bg-white rounded-lg shadow p-6'>
-        <img src={farmer.avatar || 'https://placehold.co/100x100'} alt="Avatar" className="w-24 h-24 rounded-full object-cover border" />
+        <img src={farmer.avatar || user_logo} alt="Avatar" className="w-24 h-24 rounded-full object-cover border" />
         <div>
           <h2 className='text-xl font-semibold text-green-700'>{farmer.name}</h2>
           <p className='text-gray-600'>{farmer.email}</p>

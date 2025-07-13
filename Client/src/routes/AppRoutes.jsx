@@ -31,6 +31,7 @@ import Returns from "../pages/admin/Returns";
 
 import ProtectedRoute from "../components/common/ProtectedRoute";
 import FarmerDetails from "../pages/admin/FarmerDetails";
+import AdminProducts from "../pages/admin/AdminProducts";
 
 function AppRoutes() {
   return (
@@ -64,6 +65,7 @@ function AppRoutes() {
           <Route path="farmers" element={<Farmers />} />
           <Route path="farmers/:id" element={<FarmerDetails />} />
           <Route path="farmers/:id/products" element={<FarmerProducts />} />
+          <Route path="products" element={<AdminProducts />} />
           <Route path="users" element={<Users />} />
           <Route path="orders" element={<AdminOrders />} />
           <Route path="returns" element={<Returns />} />

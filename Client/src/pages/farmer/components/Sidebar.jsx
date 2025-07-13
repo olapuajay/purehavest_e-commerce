@@ -11,6 +11,7 @@ import {
   FaTimes,
 } from 'react-icons/fa';
 import { useAuth } from '../../../components/contexts/AuthContext';
+import user_logo from "../../../assets/user.png"
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +65,7 @@ function Sidebar() {
         {/* Profile Section */}
         <div className="flex flex-col items-center mb-6">
           <img
-            src={profile?.avatar || 'https://placehold.co/100x100'}
+            src={profile?.avatar || user_logo}
             alt="Avatar"
             className="w-20 h-20 rounded-full object-cover border mb-2"
           />

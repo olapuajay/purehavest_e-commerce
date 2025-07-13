@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import user_logo from "../../assets/user.png"
 
 function Farmers() {
   const [farmers, setFarmers] = useState([]);
@@ -29,7 +30,7 @@ function Farmers() {
         {farmers.map((farmer) => (
           <div key={farmer._id} className='border rounded-lg p-4 shadow hover:shadow-lg transition'>
             <div className='flex items-center gap-4'>
-              <img src={farmer.avatar || 'https://placehold.co/100x100'} alt="avatar" className='w-20 h-20 rounded-full object-cover' />
+              <img src={farmer.avatar || user_logo} alt="avatar" className='w-20 h-20 rounded-full object-cover' />
               <div>
                 <h2 className='text-lg font-semibold'>{farmer.name}</h2>
                 <p className='text-sm text-gray-500'>{farmer.email}</p>

@@ -17,8 +17,8 @@ function Navbar() {
   const handleUserRedirect = () => {
     if (!isAuthenticated) return navigate("/login");
 
-    if (user?.role === "admin") navigate("/admin/dashboard");
-    else if (user?.role === "farmer") navigate("/farmer/dashboard");
+    if (user?.role === "admin") navigate("/admin");
+    else if (user?.role === "farmer") navigate("/farmer");
     else navigate("/profile");
 
     setMenuOpen(false);
@@ -80,12 +80,10 @@ function Navbar() {
             />
           )}
 
-          {(isUser || isGuest) && (
-            <FaUser 
-              className="text-xl cursor-pointer" 
-              onClick={handleUserRedirect} 
-            />
-          )}
+          <FaUser 
+            className="text-xl cursor-pointer" 
+            onClick={handleUserRedirect} 
+          />
 
           {!isAuthenticated ? (
             <button

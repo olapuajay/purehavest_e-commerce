@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaUsers, FaSignOutAlt, FaBars, FaTimes } from 'react-icons/fa';
+import { FaUsers, FaBoxOpen, FaUserShield, FaClipboardList, FaSignOutAlt, FaBars, FaTimes } from 'react-icons/fa';
 import { useAuth } from '../../../components/contexts/AuthContext';
 import admin_logo from '../../../assets/admin.png';
 import axios from 'axios';
@@ -56,8 +56,20 @@ function Sidebar() {
         </div>
 
         <nav className='flex flex-col gap-4'>
-          <NavLink to="/admin/farmers" className={linkClasses}>
+          <NavLink to="/admin/farmers" onClick={toggleSideBar} className={linkClasses}>
             <FaUsers /> Farmers
+          </NavLink>
+
+          <NavLink to="/admin/products" onClick={toggleSideBar} className={linkClasses}>
+            <FaBoxOpen /> Products
+          </NavLink>
+
+          <NavLink to="/admin/users" onClick={toggleSideBar} className={linkClasses}>
+            <FaUserShield /> Users
+          </NavLink>
+
+          <NavLink to="/admin/orders" onClick={toggleSideBar} className={linkClasses}>
+            <FaClipboardList /> Orders
           </NavLink>
 
           <div className='mt-4 border-t pt-2'>
