@@ -60,10 +60,10 @@ function AppRoutes() {
 
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
         <Route path="/admin" element={<AdminDashboard />}>
-          <Route path="products" element={<Products />} />
-          <Route path="users" element={<Users />} />
           <Route path="farmers" element={<Farmers />} />
           <Route path="farmers/:id" element={<FarmerDetails />} />
+          <Route path="products" element={<Products />} />
+          <Route path="users" element={<Users />} />
           <Route path="orders" element={<AdminOrders />} />
           <Route path="returns" element={<Returns />} />
         </Route>

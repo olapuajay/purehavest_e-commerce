@@ -39,7 +39,7 @@ function Navbar() {
   const isGuest = !user;
 
   return (
-    <nav className="bg-white border-b border-gray-300 px-4 md:px-8 py-4">
+    <nav className="bg-white border-b border-gray-300 px-4 md:px-8 py-4 sticky">
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div 
@@ -53,9 +53,11 @@ function Navbar() {
         </div>
 
         {/* Hamburger Icon */}
-        <div className="md:hidden text-2xl cursor-pointer" onClick={toggleMenu}>
-          {menuOpen ? <FaTimes /> : <FaBars />}
-        </div>
+        {(isUser || isGuest) && (  
+          <div className="md:hidden text-2xl cursor-pointer" onClick={toggleMenu}>
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </div>
+        )}
 
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-6">
@@ -94,7 +96,7 @@ function Navbar() {
             </button>
           ) : (
             <>
-              <span className="font-medium hidden sm:inline-block">
+              <span className="font-medium sm:inline-block">
                 Welcome, {user?.name.split(" ")[0]}
               </span>
               <button

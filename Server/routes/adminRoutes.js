@@ -16,7 +16,7 @@ import { authenticate, authorize } from "../middleware/authMiddleware.js";
 const Router = express.Router();
 
 Router.get("/profile", authenticate, authorize("admin"), (req, res) => {
-  const { name, email } = req.user; // from token
+  const { name, email } = req.user;
   res.json({ admin: { name, email } });
 });
 
