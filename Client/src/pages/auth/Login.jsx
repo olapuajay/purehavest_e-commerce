@@ -41,13 +41,13 @@ function Login() {
         password: form.password,
       });
 
-      login(res.data.user, res.data.token);
+      login(res.data.user, res.data.token, form.role);
 
       setMessage({ text: 'Login successful. Redirecting...', type: 'success' });
 
       setTimeout(() => {
-        if (res.data.user.role === 'admin') navigate('/admin');
-        else if (res.data.user.role === 'farmer') navigate('/farmer');
+        if (form.role === 'admin') navigate('/admin');
+        else if (form.role === 'farmer') navigate('/farmer');
         else navigate('/');
       }, 1500);
     } catch (error) {

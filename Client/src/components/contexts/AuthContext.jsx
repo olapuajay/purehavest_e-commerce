@@ -1,64 +1,68 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const AuthContext = createContext();
 
+const getRole = (pathname) => {
+  if (pathname.startsWith("/admin")) return "admin";
+  if (pathname.startsWith("/farmer")) return "farmer";
+  return "user";
+};
+
+const getTokenKey = (role) => `${role}Token`;
+const getUserKey = (role) => `${role}User`;
+
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(
-    () => localStorage.getItem("token") || null
-  );
+  const location = useLocation();
+  const role = getRole(location.pathname);
+
+  const tokenKey = getTokenKey(role);
+  const userKey = getUserKey(role);
+
+  const [token, setToken] = useState(() => localStorage.getItem(tokenKey) || null);
   const [user, setUser] = useState(() => {
     try {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser === "undefined" || !storedUser) return null;
+      const storedUser = localStorage.getItem(userKey);
+      if (!storedUser || storedUser === "undefined") return null;
       return JSON.parse(storedUser);
-    } catch (error) {
-      console.error("Failed to parse user from localStorage:", error);
+    } catch {
       return null;
     }
   });
 
-  const login = (userData, token) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(userData));
+  const login = (userData, token, role) => {
+    const tokenKey = `${role}Token`;
+    const userKey = `${role}User`;
+    localStorage.setItem(tokenKey, token);
+    localStorage.setItem(userKey, JSON.stringify(userData));
     setToken(token);
     setUser(userData);
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem(tokenKey);
+    localStorage.removeItem(userKey);
     setToken(null);
     setUser(null);
   };
 
   useEffect(() => {
-    // Optional: Could re-sync with localStorage here if needed
-    const storedToken = localStorage.getItem("token");
-    const storedUser = localStorage.getItem("user");
+    const storedToken = localStorage.getItem(tokenKey);
+    const storedUser = localStorage.getItem(userKey);
 
     try {
       if (storedToken && storedUser) {
-        const parsedUser = JSON.parse(storedUser);
         setToken(storedToken);
-        setUser(parsedUser);
+        setUser(JSON.parse(storedUser));
       }
-    } catch (error) {
-      console.error("Error syncing auth from localStorage:", error);
+    } catch {
       setToken(null);
       setUser(null);
     }
-  }, []);
+  }, [tokenKey, userKey]);
 
   return (
-    <AuthContext.Provider
-      value={{
-        token,
-        user,
-        login,
-        logout,
-        isAuthenticated: !!token,
-      }}
-    >
+    <AuthContext.Provider value={{ token, user, login, logout, isAuthenticated: !!token, role }}>
       {children}
     </AuthContext.Provider>
   );

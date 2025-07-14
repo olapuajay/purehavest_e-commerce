@@ -8,7 +8,7 @@ import axios from 'axios';
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [admin, setAdmin] = useState(null);
-  const token = localStorage.getItem('token');
+  const { token } = useAuth();
   const API = import.meta.env.VITE_API_URL;
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -26,6 +26,23 @@ function Sidebar() {
     };
     fetchAdmin();
   }, [token]);
+
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+
+    if (isMobile) {
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
 
   const handleLogout = () => {
     logout();

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useAuth } from '../../components/contexts/AuthContext.jsx';
 
 function AdminReturns() {
   const [returns, setReturns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [noteMap, setNoteMap] = useState({});
   const [statusFilter, setStatusFilter] = useState("all");
-  const token = localStorage.getItem('token');
+  const { token } = useAuth();
   const API = import.meta.env.VITE_API_URL;
 
   const fetchReturns = async () => {
