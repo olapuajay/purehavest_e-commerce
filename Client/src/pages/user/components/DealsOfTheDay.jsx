@@ -58,7 +58,7 @@ export default function DealsOfTheDay() {
             <img
               src={item.image}
               alt={item.name}
-              className="w-28 h-28 object-contain mb-4"
+              className="w-48 h-48 object-contain mb-4"
             />
             <h2 className="text-lg font-semibold">{item.name}</h2>
             <p className="text-sm text-gray-600">{item.quantity}</p>
