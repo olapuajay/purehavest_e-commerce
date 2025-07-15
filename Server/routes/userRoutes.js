@@ -9,5 +9,5 @@ Router.post("/login", loginUser);
 Router.get("/profile", authenticate, profile);
 Router.patch("/updateprofile", authenticate, updateProfile);
 Router.patch("/address", authenticate, authorize("user"), updateAddress);
-
+    
 export default Router;
