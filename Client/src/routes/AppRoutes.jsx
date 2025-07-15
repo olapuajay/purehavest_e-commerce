@@ -9,7 +9,7 @@ import Home from "../pages/user/Home";
 import Products from "../pages/user/Products";
 import ProductDetails from "../pages/user/ProductDetails";
 import Cart from "../pages/user/Cart";
-import Checkout from "../pages/user/Checkout";
+import CheckoutForm from "../pages/user/CheckoutForm";
 import Orders from "../pages/user/Orders";
 import Profile from "../pages/user/Profile";
 import Invoice from "../pages/user/Invoice";
@@ -45,7 +45,7 @@ function AppRoutes() {
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkoutform" element={<CheckoutForm />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/invoice/:id" element={<Invoice />} />
