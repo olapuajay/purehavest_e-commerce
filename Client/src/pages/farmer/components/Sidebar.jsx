@@ -16,7 +16,7 @@ import user_logo from "../../../assets/user.png"
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [profile, setProfile] = useState(null);
-  const token = localStorage.getItem('token');
+  const { token } = useAuth();
   const API = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const { logout } = useAuth();
@@ -34,6 +34,23 @@ function Sidebar() {
     };
     fetchProfile();
   }, [token]);
+
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+  
+    if (isMobile) {
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+  
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+  
 
   const handleLogout = () => {
     logout();

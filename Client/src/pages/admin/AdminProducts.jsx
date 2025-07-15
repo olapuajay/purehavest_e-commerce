@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaCheck, FaTimes, FaTrash } from 'react-icons/fa';
+import { useAuth } from '../../components/contexts/AuthContext.jsx';
 
 function AdminProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("");
   const API = import.meta.env.VITE_API_URL;
-  const token = localStorage.getItem('token');
+  const { token } = useAuth();
 
   const fetchAllProducts = async () => {
     try {

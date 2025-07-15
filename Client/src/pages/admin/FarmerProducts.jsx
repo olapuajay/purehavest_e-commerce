@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FaCheck, FaTimes, FaTrashAlt } from 'react-icons/fa';
+import { useAuth } from '../../components/contexts/AuthContext.jsx';
 
 function FarmerProducts() {
   const { id } = useParams();
@@ -9,7 +10,7 @@ function FarmerProducts() {
   const [farmer, setFarmer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("");
-  const token = localStorage.getItem('token');
+  const { token } = useAuth();
   const API = import.meta.env.VITE_API_URL;
 
   const fetchProductsByFarmer = async () => {

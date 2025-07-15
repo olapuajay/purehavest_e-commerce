@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../components/contexts/AuthContext.jsx';
 
 function AdminUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const API = import.meta.env.VITE_API_URL;
-  const token = localStorage.getItem('token');
+  const { token } = useAuth();
   const navigate = useNavigate();
 
   const fetchUsers = async () => {

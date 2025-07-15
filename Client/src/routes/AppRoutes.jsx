@@ -12,7 +12,6 @@ import Cart from "../pages/user/Cart";
 import CheckoutForm from "../pages/user/CheckoutForm";
 import Orders from "../pages/user/Orders";
 import Profile from "../pages/user/Profile";
-import Invoice from "../pages/user/Invoice";
 
 // Farmer Pages
 import FarmerDashboard from "../pages/farmer/Dashboard";
@@ -48,7 +47,6 @@ function AppRoutes() {
         <Route path="/checkoutform" element={<CheckoutForm />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/invoice/:id" element={<Invoice />} />
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={['farmer']} />}>

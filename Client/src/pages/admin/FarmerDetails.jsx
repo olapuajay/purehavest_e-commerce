@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import user_logo from "../../assets/user.png"
+import { useAuth } from '../../components/contexts/AuthContext.jsx';
 
 function FarmerDetails() {
   const { id } = useParams();
   const [farmer, setFarmer] = useState(null);
   const API = import.meta.env.VITE_API_URL;
-  const token = localStorage.getItem('token');
+  const { token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
