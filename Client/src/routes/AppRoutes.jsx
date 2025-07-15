@@ -12,6 +12,7 @@ import Cart from "../pages/user/Cart";
 import CheckoutForm from "../pages/user/CheckoutForm";
 import Orders from "../pages/user/Orders";
 import Profile from "../pages/user/Profile";
+import OrderSuccess from "../pages/user/components/OrderSuccess";
 
 // Farmer Pages
 import FarmerDashboard from "../pages/farmer/Dashboard";
@@ -44,7 +45,8 @@ function AppRoutes() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/checkoutform" element={<CheckoutForm />} />
+        <Route path="/checkout" element={<CheckoutForm />} />
+        <Route path="/ordersuccess" element={<OrderSuccess />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/profile" element={<Profile />} />
       </Route>

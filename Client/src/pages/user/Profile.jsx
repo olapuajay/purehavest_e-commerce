@@ -21,6 +21,7 @@ function Profile() {
   });
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState({ text: '', type: '' });
+  const [orders, setOrders] = useState([]);
 
   const fetchProfile = async () => {
     setLoading(true);
@@ -39,8 +40,11 @@ function Profile() {
   };
 
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    if(token) {
+      fetchProfile();
+      fetchOrders();
+    }
+  }, [token]);
 
   const handleProfileChange = (e) => {
     const { name, value } = e.target;
@@ -80,6 +84,51 @@ function Profile() {
       setMessage({ text: "Failed to update address", type: "error" });
     }
   };
+
+  const fetchOrders = async () => {
+    try {
+      const res = await axios.get(`${API}/orders/myorders`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log("Orders response: ", res.data);
+      setOrders(res.data.orders || []);
+    } catch (error) {
+      console.log("Failed to fetch orders: ", error);
+    }
+  }
+
+  const handleCancel = async (id) => {
+    try {
+      await axios.patch(`${API}/orders/cancel/${id}`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      fetchOrders();
+    } catch (err) {
+      alert("Failed to cancel order");
+    }
+  };
+
+  const handleReturn = async (id) => {
+    try {
+      await axios.patch(`${API}/orders/return/${id}`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      fetchOrders();
+    } catch (err) {
+      alert("Failed to request return");
+    }
+  };
+
+  const getTrackingMessage = (status) => {
+    switch(status) {
+      case 'Processing': return "Your order is being prepared";
+      case 'Shipped': return "Order has been shipped";
+      case 'Delivered': return "Delivered to your address";
+      case 'Cancelled': return "Order has been cancelled";
+      default: return "Status not available";
+    }
+  };
+
 
   if(loading) {
     return (
@@ -157,6 +206,60 @@ function Profile() {
           Update Address
         </button>
       </form>
+
+      <div className='bg-white shadow rounded p-4 sm:p-6 mt-10'>
+        <h3 className='text-lg font-semibold mb-4'>My Orders</h3>
+        {orders.length === 0 ? (
+          <p className="text-sm text-gray-500">You haven't placed any orders yet.</p>
+        ) : (
+          orders.map((order) => (
+            <div key={order._id} className="border-b py-4 text-sm">
+              <div className='flex justify-between'>
+                <div>
+                  <p><span className="font-semibold">Order ID:</span> {order._id}</p>
+                  <p><span className="font-semibold">Total:</span> ₹{order.total}</p>
+                  <p><span className="font-semibold">Status:</span> <span className={`text-${order.status === 'Delivered' ? 'green' : 'orange'}-600`}>{order.status}</span></p>
+                  <p><span className="font-semibold">Paid:</span> {order.isPaid ? 'Yes' : 'No'}</p>
+                  <p><span className="font-semibold">Date:</span> {new Date(order.createdAt).toLocaleDateString()}</p>
+                </div>
+                <div className='text-right space-y-2'>
+                  {/* Cancel */}
+                  {order.status === 'Processing' && (
+                    <button
+                      onClick={() => handleCancel(order._id)}
+                      className="text-red-600 border border-red-600 px-3 py-1 rounded hover:bg-red-50"
+                    >
+                      Cancel
+                    </button>
+                  )}
+
+                  {/* Return */}
+                  {order.status === 'Delivered' && !order.returnRequested && (
+                    <button
+                      onClick={() => handleReturn(order._id)}
+                      className="text-blue-600 border border-blue-600 px-3 py-1 rounded hover:bg-blue-50"
+                    >
+                      Return
+                    </button>
+                  )}
+
+                  {/* Already returned */}
+                  {order.returnRequested && (
+                    <p className="text-xs italic text-gray-600">Return Requested</p>
+                  )}
+                </div>
+              </div>
+              {/* Track Status */}
+              <div className='mt-2'>
+                <p className='text-xs text-gray-500 italic'>
+                  Tracking: {getTrackingMessage(order.status)}
+                </p>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
     </div>
   )
 }

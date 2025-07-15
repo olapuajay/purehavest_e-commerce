@@ -69,6 +69,8 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  const clearCart = () => setCartItems([]);
+
   useEffect(() => {
     if(token) {
       fetchCart();
@@ -76,7 +78,7 @@ export const CartProvider = ({ children }) => {
   }, [token]);
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, updateCartItem, deleteCartItem }}>
+    <CartContext.Provider value={{ cartItems, addToCart, updateCartItem, deleteCartItem, clearCart }}>
       {children}
     </CartContext.Provider>
   );

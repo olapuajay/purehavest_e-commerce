@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import fruitsImg from '../../../assets/fruits.png';
 import vegetablesImg from '../../../assets/vegetables.png';
@@ -19,14 +20,16 @@ const categories = [
 ];
 
 function CategoryCarousel() {
+  const navigate = useNavigate();
   return (
     <section className="p-8 bg-white">
       <h2 className="text-xl mb-4 text-gray-900 flex items-center">Shop by Categories</h2>
       <div className="flex overflow-x-auto gap-16 pb-4 scrollbar-hide">
         {categories.map((category, index) => (
           <div 
-            className="min-w-[150px] h-[150px] bg-gray-200 rounded-lg text-center p-2 flex-shrink-0 flex flex-col justify-between shadow-sm" 
+            className="min-w-[150px] h-[150px] bg-gray-200 rounded-lg text-center p-2 flex-shrink-0 flex flex-col justify-between shadow-sm hover:cursor-pointer" 
             key={index}
+            onClick={() => navigate("/products")}
           >
             <p className="text-base font-bold mb-1">{category.name}</p>
             <img 

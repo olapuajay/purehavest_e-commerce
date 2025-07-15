@@ -8,7 +8,9 @@ function Cart() {
   const { cartItems, updateCartItem, deleteCartItem } = useCart();
 
   const handleProceedToPay = () => {
-    navigate('/checkout');
+    navigate('/checkout', {
+      state: { amount: totalAmount },
+    });
   };
 
   const deliveryFee = 20;
