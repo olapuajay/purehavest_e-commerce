@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
+import { useCart } from "../../components/contexts/cartContext";
+
 
 const units = [
   { label: "1kg", value: 1 },
@@ -17,6 +19,9 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedUnit, setSelectedUnit] = useState(units[0].value);
+
+  const { addToCart } = useCart();
+
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -82,7 +87,7 @@ const ProductDetails = () => {
           <p className="text-gray-500 text-sm">{product.description}</p>
           <p className="text-gray-600">{product.qty}</p>
           <p className="text-2xl text-green-800 font-bold">
-            ₹{product.price} / {product.qty}
+            ₹{product.price} / {product.unit}
           </p>
 
           <div>
@@ -104,7 +109,10 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          <button className="mt-4 bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 transition-colors">
+          <button onClick={() => {
+            addToCart(product._id, 1);
+            navigate("/cart");
+          }} className="mt-4 bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 transition-colors">
             Add to Cart
           </button>
         </div>

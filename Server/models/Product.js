@@ -15,6 +15,11 @@ const productSchema = mongoose.Schema(
     },
     description: { type: String },
     price: { type: Number, required: true },
+    unit: {
+      type: String, 
+      enum: ["kg", "gram", "litre", "ml", "piece", "dozen", "pack"],
+      required: true,
+    },
     quantity: { type: Number, required: true },
     image: { type: String },
     status: {

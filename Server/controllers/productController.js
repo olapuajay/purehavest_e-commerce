@@ -2,9 +2,9 @@ import productModel from "../models/Product.js";
 
 export const createProduct = async (req, res) => {
   try {
-    const { name, category, description, price, quantity, image } = req.body;
+    const { name, category, description, price, quantity, unit, image } = req.body;
     const product = await productModel.create(
-      { name, category, description, price, quantity, image: req.file?.path, farmer: req.user.id, }
+      { name, category, description, price, quantity, unit, image: req.file?.path, farmer: req.user.id, }
     );
     res.status(201).json({ message: "Product created successfully", product });
   } catch (error) {
@@ -25,7 +25,7 @@ export const getMyProducts = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   try {
-    const { name, category, description, price, quantity } = req.body;
+    const { name, category, description, price, quantity, unit } = req.body;
     const image = req.file?.path;
     const product = await productModel.findOne({ _id: req.params.id, farmer: req.user.id });
     if(!product) {
@@ -37,6 +37,7 @@ export const updateProduct = async (req, res) => {
     if(description) product.description = description;
     if(price) product.price = price;
     if(quantity) product.quantity = quantity;
+    if(unit) product.unit = unit;
     if(image) product.image = image;
 
     const updated = await product.save();

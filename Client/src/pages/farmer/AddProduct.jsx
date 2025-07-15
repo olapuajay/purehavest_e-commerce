@@ -6,11 +6,19 @@ const categories = [
   "Dairy", "Cereals", "Grains", "Vegetables", "Fruits", "Spices", "Dryfruits", "Meat",
 ];
 
+const units = [
+  "kg",
+  "litre",
+  "dozen",
+  "piece",
+  "pack",
+];
+
 function AddProduct() {
   const { token } = useAuth();
 
   const [formData, setFormData] = useState({
-    name: "", price: "", category: "", quantity: "", description: "", image: null,
+    name: "", price: "", category: "", quantity: "", unit: "", description: "", image: null,
   });
 
   const [loading, setLoading] = useState(false);
@@ -104,6 +112,19 @@ function AddProduct() {
           required
           className="border p-2 rounded"
         />
+
+        <select
+          name="unit"
+          value={formData.unit}
+          onChange={handleChange}
+          className="border p-2 rounded"
+          required
+        >
+          <option value="">Select Unit</option>
+          {units.map((u, idx) => (
+            <option key={idx} value={u}>{u}</option>
+          ))}
+        </select>
 
         <input
           type="number"
