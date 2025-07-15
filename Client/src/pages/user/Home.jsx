@@ -6,6 +6,7 @@ import WhyChooseUs from './components/WhyChooseUs';
 import HowItWorks from './components/HowItWorks';
 import JoinUsBanner from './components/JoinUsBanner';
 
+
 const Home = () => {
   return (
     <div>
@@ -16,7 +17,7 @@ const Home = () => {
       <WhyChooseUs />
       <HowItWorks />
       <JoinUsBanner />
-   
+  
     </div>
   );
 };
