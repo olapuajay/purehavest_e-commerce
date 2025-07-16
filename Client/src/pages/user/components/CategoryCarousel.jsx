@@ -21,22 +21,26 @@ const categories = [
 
 function CategoryCarousel() {
   const navigate = useNavigate();
+
   return (
-    <section className="p-8 bg-white">
-      <h2 className="text-xl mb-4 text-gray-900 flex items-center">Shop by Categories</h2>
-      <div className="flex overflow-x-auto gap-16 pb-4 scrollbar-hide">
+    <section className="p-4 sm:p-6 md:p-8 bg-white">
+      <h2 className="text-lg sm:text-xl font-semibold mb-4 text-gray-900">Shop by Categories</h2>
+      
+      <div className="flex overflow-x-auto gap-6 sm:gap-8 md:gap-10 pb-4 scrollbar-hide scroll-smooth snap-x snap-mandatory">
         {categories.map((category, index) => (
-          <div 
-            className="min-w-[150px] h-[150px] bg-gray-200 rounded-lg text-center p-2 flex-shrink-0 flex flex-col justify-between shadow-sm hover:cursor-pointer" 
+          <div
             key={index}
-            onClick={() => navigate("/products")}
+            onClick={() => navigate(`/products?category=${encodeURIComponent(category.name)}`)}
+            className="min-w-[120px] sm:min-w-[140px] md:min-w-[160px] max-w-[160px] snap-start flex-shrink-0 bg-gray-100 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 text-center p-3 hover:cursor-pointer"
           >
-            <p className="text-base font-bold mb-1">{category.name}</p>
-            <img 
-              src={category.image} 
-              alt={category.name} 
-              className="w-[70%] h-[110px] object-fill rounded-lg pl-5" 
-            />
+            <div className="h-24 sm:h-28 md:h-32 flex items-center justify-center mb-2">
+              <img
+                src={category.image}
+                alt={category.name}
+                className="h-full w-auto object-contain rounded"
+              />
+            </div>
+            <p className="text-sm sm:text-base font-medium text-gray-800">{category.name}</p>
           </div>
         ))}
       </div>

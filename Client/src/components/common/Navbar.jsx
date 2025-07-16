@@ -43,13 +43,13 @@ function Navbar() {
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div 
-          className="text-xl font-bold cursor-pointer"
+          className="text-xl font-medium cursor-pointer italic"
           onClick={() => {
             navigate("/");
             setMenuOpen(false);
           }}
         >
-          Farmers Store
+          <span className='text-3xl text-green-700'>P</span>ure<span className='text-3xl text-green-700'>H</span>arvest
         </div>
 
         {/* Hamburger Icon */}

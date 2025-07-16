@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../../components/contexts/cartContext';
 
@@ -24,7 +24,8 @@ const categories = [
 ];
 
 const Products = () => {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
+  const [searchParams] = useSearchParams();
+  const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || categories[0].name);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const API = import.meta.env.VITE_API_URL;
@@ -61,7 +62,7 @@ const Products = () => {
         {categories.map((cat) => (
           <button
             key={cat.name}
-            className={`p-4 md:w-full w-24 text-center hover:bg-green-100 hover:cursor-pointer ${
+            className={`p-4 md:w-full w-24 text-center hover:bg-green-100 hover:cursor-pointer duration-300 ${
               selectedCategory === cat.name ? 'bg-green-300 font-semibold' : ''
             }`}
             onClick={() => setSelectedCategory(cat.name)}
@@ -99,12 +100,12 @@ const Products = () => {
                   />
                   <div className="text-lg font-medium mb-1">{product.name}</div>
                   {/* <div className="text-gray-500 text-sm mb-1">{product.quantity}</div> */}
-                  <div className="text-gray-700 font-semibold mb-2">{product.price} / {product.unit}</div>
+                  <div className="text-gray-700 font-semibold mb-2">₹{product.price} / {product.unit}</div>
                 </div>
                 <button onClick={() => {
                   addToCart(product._id, 1);
                   navigate("/cart");
-                }} className="bg-green-700 text-white px-6 py-2 rounded-lg w-full mt-2 hover:bg-green-800">
+                }} className="bg-green-700 text-white px-6 py-2 rounded-lg w-full mt-2 hover:bg-green-800 cursor-pointer">
                   Add
                 </button>
               </div>

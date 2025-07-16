@@ -1,22 +1,21 @@
 import React from 'react';
-import honeyImg from '../../../assets/honey.png'; // Optional: Add again if needed
+import honeyImg from "../../../assets/honeybr.png"
+import { useNavigate } from 'react-router-dom';
 
-const FeaturedProdInfo = ({ onClose }) => {
+const FeaturedProdInfo = () => {
+  const navigate = useNavigate();
   return (
-    <section className="px-6 py-10 bg-white text-left">
-      {/* Close Button */}
+    <section className="px-6 py-10 bg-white text-left pt-20">
       <div className="text-right">
         <button
-          onClick={onClose}
+          onClick={() => navigate(-1)}
           className="text-sm text-red-600 border border-red-600 px-4 py-1 rounded hover:bg-red-600 hover:text-white transition-all"
         >
           Close
         </button>
       </div>
 
-      {/* Product and Farmer Details */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 my-6 border p-6 rounded-xl shadow-md">
-        {/* Product Details */}
         <div className="space-y-3">
           <h2 className="text-2xl font-semibold underline">Product Details</h2>
           <p><strong>Name:</strong> Organic Honey</p>
@@ -30,7 +29,6 @@ const FeaturedProdInfo = ({ onClose }) => {
           <p><strong>Storage Instructions:</strong> Refrigerated or in shelf dry place</p>
         </div>
 
-        {/* Farmer & Farm Details */}
         <div className="space-y-3">
           <h2 className="text-2xl font-semibold underline">Farmer & Farm Details</h2>
           <p><strong>Farmer Name:</strong> Ramesh Pawar</p>
@@ -44,9 +42,7 @@ const FeaturedProdInfo = ({ onClose }) => {
         </div>
       </div>
 
-      {/* Health Benefits Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-10 p-6 border rounded-xl shadow-md">
-        {/* Left: Benefits Text */}
         <div className="space-y-3">
           <h2 className="text-2xl font-semibold text-green-800 italic">Health Benefits of Honey</h2>
           <ul className="list-decimal pl-5 space-y-1">
@@ -60,7 +56,6 @@ const FeaturedProdInfo = ({ onClose }) => {
           </ul>
         </div>
 
-        {/* Right: Image */}
         <img 
           src={honeyImg} 
           alt="Honey Dripping" 

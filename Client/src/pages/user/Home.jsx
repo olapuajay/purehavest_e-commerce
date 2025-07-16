@@ -5,6 +5,7 @@ import DealsOfTheDay from './components/DealsOfTheDay';
 import WhyChooseUs from './components/WhyChooseUs'; 
 import HowItWorks from './components/HowItWorks';
 import JoinUsBanner from './components/JoinUsBanner';
+import Footer from '../../components/common/Footer';
 
 
 const Home = () => {
@@ -17,7 +18,7 @@ const Home = () => {
       <WhyChooseUs />
       <HowItWorks />
       <JoinUsBanner />
-  
+      <Footer />
     </div>
   );
 };

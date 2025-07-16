@@ -20,21 +20,16 @@ export default function HowItWorks() {
         className="w-48 h-auto mx-auto mt-6"
       />
     </div>
-
-    {/* For Farmers */}
     <div className="bg-[#467612] text-white rounded-lg p-8 w-full md:w-96 h-[400px] text-center relative">
-       <div>
-    <h3 className="text-2xl font-semibold mb-4">For Farmers</h3>
-    <div className="text-left italic space-y-1 mb-4 text-lg">
-      <p>Register →</p>
-      <p>Upload</p>
-      <p>Products →</p>
-      <p>Start Selling</p>
-    </div>
-  </div>
+      <h3 className="text-2xl font-semibold mb-4">For Faarmers</h3>
+      <div className="text-left italic space-y-1 mb-4 text-lg">
+        <p>Register →</p>
+        <p>Upload</p>
+        <p>Products → Start Selling</p>
+      </div>
       <img
         src={Farmerwoman}
-        alt="Farmer"
+        alt="Buyer"
         className="w-48 h-auto mx-auto mt-6"
       />
     </div>

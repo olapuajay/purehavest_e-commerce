@@ -8,6 +8,9 @@ import Register from "../pages/auth/Register";
 import Home from "../pages/user/Home";
 import Products from "../pages/user/Products";
 import ProductDetails from "../pages/user/ProductDetails";
+import FeaturedHoney from "../pages/user/components/FeaturedHoney";
+import FeaturedMilk from "../pages/user/components/FeaturedMilk";
+import FeaturedOil from "../pages/user/components/FeaturedOil";
 import Cart from "../pages/user/Cart";
 import CheckoutForm from "../pages/user/CheckoutForm";
 import Orders from "../pages/user/Orders";
@@ -44,6 +47,9 @@ function AppRoutes() {
       <Route element={<ProtectedRoute allowedRoles={['user']} />}>
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/featured/honey" element={<FeaturedHoney />} />
+        <Route path="/featured/milk" element={<FeaturedMilk />} />
+        <Route path="/featured/oil" element={<FeaturedOil />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<CheckoutForm />} />
         <Route path="/ordersuccess" element={<OrderSuccess />} />

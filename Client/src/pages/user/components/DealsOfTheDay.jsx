@@ -1,4 +1,3 @@
-// import SonamasooriRice from '../../../assets/oil.png';
 import Turmeric from '../../../assets/turmeric.png';
 import Tamarind from '../../../assets/tamarind.png';
 import Apples from '../../../assets/apples.png';
@@ -9,44 +8,56 @@ const products = [
   {
     name: 'Sonamasoori Rice',
     quantity: '25 kgs',
-    price: '500',
-   image :Rice ,
+    unit: '25kg',
+    price: 500,
+    discount: 0.5,
+    image: Rice,
   },
   {
     name: 'Moong Dal',
     quantity: '5 kgs',
-    price: '200',
+    unit: '5kg',
+    price: 200,
+    discount: 0.5,
     image: Moongdal,
   },
   {
     name: 'Apples',
     quantity: '5 kgs',
-    price: '200',
+    unit: '5kg',
+    price: 200,
+    discount: 0.5,
     image: Apples,
   },
   {
     name: 'Eggs',
     quantity: 'Dozen',
-    price: '30',
-    image:Eggs,
+    unit: 'dozen',
+    price: 30,
+    discount: 0.5,
+    image: Eggs,
   },
   {
     name: 'Tamarind',
     quantity: '2kgs',
-    price: '100',
+    unit: '2kg',
+    price: 100,
+    discount: 0.5,
     image: Tamarind,
   },
   {
     name: 'Turmeric',
     quantity: '2kgs',
-    price: '100',
+    unit: '2kg',
+    price: 100,
+    discount: 0.5,
     image: Turmeric,
   },
 ];
 
 export default function DealsOfTheDay() {
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto pb-6">
       <h1 className="text-3xl font-semibold text-center mb-10">Deals of the Day</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((item, index) => (
@@ -63,7 +74,7 @@ export default function DealsOfTheDay() {
             <h2 className="text-lg font-semibold">{item.name}</h2>
             <p className="text-sm text-gray-600">{item.quantity}</p>
             <p className="text-green-700 font-semibold mt-2">{item.price}/-</p>
-            <button className="mt-3 bg-green-700 hover:bg-green-800 text-white px-4 py-1 rounded">
+            <button className="mt-3 bg-green-700 hover:bg-green-800 text-white px-4 py-1 rounded cursor-pointer">
               Add to Cart
             </button>
           </div>
