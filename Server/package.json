@@ -13,10 +13,12 @@
   "type": "module",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.7.0",
     "cors": "^2.8.5",
     "dotenv": "^17.0.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
     "mongoose": "^8.16.1",
     "multer": "^2.0.1",
     "multer-storage-cloudinary": "^4.0.0",
