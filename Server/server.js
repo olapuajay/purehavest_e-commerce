@@ -21,8 +21,18 @@ import paymentRoutes from './routes/paymentRoutes.js';
 connectDB();
 
 const app = express();
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://e-commerce-mern-frontend-iota.vercel.app/"
+];
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+// app.options("/*", cors());
+
 app.use(express.json());
-app.use(cors());
 
 app.use("/api/users", userRoutes);
 app.use("/api/farmers", farmerRoutes);

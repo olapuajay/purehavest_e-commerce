@@ -107,7 +107,7 @@ function Login() {
 
         <button
           type="submit"
-          className="w-full bg-green-600 text-white p-2 rounded mt-2"
+          className="w-full bg-green-600 text-white p-2 rounded mt-2 cursor-pointer hover:bg-green-700 duration-300"
         >
           Login
         </button>

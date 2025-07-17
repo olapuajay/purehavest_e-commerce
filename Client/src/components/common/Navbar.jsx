@@ -88,7 +88,7 @@ function Navbar() {
           {!isAuthenticated ? (
             <button
               onClick={() => navigate("/register")}
-              className="border border-green-600 text-green-600 rounded-lg px-4 py-2"
+              className="border border-green-600 text-green-600 rounded-lg px-4 py-2  cursor-pointer hover:bg-green-700 hover:text-white duration-300"
             >
               Sign Up
             </button>

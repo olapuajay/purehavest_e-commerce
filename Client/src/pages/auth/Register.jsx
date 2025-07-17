@@ -7,7 +7,7 @@ function Register() {
     name: '',
     email: '',
     password: '',
-    role: 'farmer',
+    role: '',
     address: {
       fullName: '',
       phone: '',
@@ -68,16 +68,22 @@ function Register() {
       newErrors.role = 'Please select a role';
     }
 
-    const { address } = form;
-    if(!address.fullName?.trim()) addressErrors.fullName = 'Full name is required';
-    if(!address.phone?.trim()) addressErrors.phone = 'Phone number is required';
-    if(!address.street?.trim()) addressErrors.street = 'Full name is required';
-    if(!address.city?.trim()) addressErrors.city = 'City is required';
-    if(!address.state?.trim()) addressErrors.state = 'State is required';
-    if(!address.pincode?.trim()) addressErrors.pincode = 'Pincode is required';
-    if(!address.country?.trim()) addressErrors.country = 'Country is required';
+    if(!form.role) {
+      newErrors.role = 'Role is required';
+    }
 
-    if(Object.keys(addressErrors).length > 0) newErrors.address = addressErrors;
+    if(form.role === "user") {
+      const { address } = form;
+      if(!address.fullName?.trim()) addressErrors.fullName = 'Full name is required';
+      if(!address.phone?.trim()) addressErrors.phone = 'Phone number is required';
+      if(!address.street?.trim()) addressErrors.street = 'Full name is required';
+      if(!address.city?.trim()) addressErrors.city = 'City is required';
+      if(!address.state?.trim()) addressErrors.state = 'State is required';
+      if(!address.pincode?.trim()) addressErrors.pincode = 'Pincode is required';
+      if(!address.country?.trim()) addressErrors.country = 'Country is required';
+  
+      if(Object.keys(addressErrors).length > 0) newErrors.address = addressErrors;
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -249,7 +255,7 @@ function Register() {
 
         <button
           type='submit'
-          className="w-full bg-green-600 text-white p-2 rounded mt-2"
+          className="w-full bg-green-600 text-white p-2 rounded mt-2 cursor-pointer hover:bg-green-700 duration-300"
         >
           Register
         </button>
