@@ -22,6 +22,7 @@ function AddProduct() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ text: '', type: '' });
 
   const API = import.meta.env.VITE_API_URL;
 
@@ -53,23 +54,30 @@ function AddProduct() {
         },
       });
 
-      alert("Product added successfully!");
+      setMessage({ text: "Product added successfully!", type: "success" });
 
       setFormData({
         name: "", price: "", category: "", quantity: "", description: "", image: null,
       });
     } catch (error) {
       console.log(error);
-      alert("Failed to add product");
+      const msg = error?.response?.data?.message || "Failed to add product";
+      setMessage({ text: msg, type: "error" });
     } finally {
       setLoading(false);
     }
   }
   return (
     <div className="bg-white p-6 rounded shadow max-w-3xl mx-auto mt-6">
+
       <h2 className="text-2xl font-bold mb-6">Add New Product</h2>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
+        {message.text && (
+          <div className={`mb-4 p-3 rounded text-center text-sm ${message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+            {message.text}
+          </div>
+        )}
         <input
           type="text"
           name="name"
@@ -147,7 +155,7 @@ function AddProduct() {
         <button
           type="submit"
           disabled={loading}
-          className="bg-green-600 text-white py-2 rounded hover:bg-green-700"
+          className="bg-green-600 text-white py-2 rounded hover:bg-green-700 cursor-pointer duration-300"
         >
           {loading ? "Adding..." : "Add Product"}
         </button>

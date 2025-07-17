@@ -18,7 +18,7 @@ const categories = [
   { name: 'Vegetables', image: vegetablesImg },
   { name: 'Dry Fruits', image: dryFruitsImg },
   { name: 'Dairy', image: dairyImg },
-  { name: 'Cereals', image: cerealsImg },
+  { name: 'Grains', image: cerealsImg },
   { name: 'Meat & Eggs', image: meatImg },
   { name: 'Spices', image: spicesImg },
 ];
