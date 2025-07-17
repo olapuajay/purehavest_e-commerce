@@ -24,7 +24,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://e-commerce-mern-frontend-iota.vercel.app/"
+  "https://e-commerce-mern-frontend-iota.vercel.app"
 ];
 app.use(cors({
   origin: allowedOrigins,
