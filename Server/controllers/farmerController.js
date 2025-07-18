@@ -100,7 +100,7 @@ export const farmerStats = async (req, res) => {
       order.items.forEach(item => {
         if(item.product?.farmer?.toString() === req.user.id) {
           totalOrders += 1;
-          totalRevenue += item.product.price * item.product.unit;
+          totalRevenue += item.product.price * item.product.quantity;
         }
       });
     });
