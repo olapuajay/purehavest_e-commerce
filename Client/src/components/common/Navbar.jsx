@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaSearch, FaShoppingCart, FaUser, FaBars, FaTimes } from 'react-icons/fa';
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/pureharvestlogo.png";
 
 function Navbar() {
   const { user, logout, isAuthenticated } = useAuth();
@@ -43,13 +44,13 @@ function Navbar() {
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div 
-          className="text-xl font-medium cursor-pointer italic"
+          className="cursor-pointer"
           onClick={() => {
             navigate("/");
             setMenuOpen(false);
           }}
         >
-          <span className='text-3xl text-green-700'>P</span>ure<span className='text-3xl text-green-700'>H</span>arvest
+          <img src={logo} alt="" className='md:h-12 h-8' />
         </div>
 
         {/* Hamburger Icon */}
