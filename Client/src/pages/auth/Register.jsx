@@ -93,7 +93,7 @@ function Register() {
     e.preventDefault();
     if(!validate()) return;
     try {
-      const endpoint = form.role === 'farmer' ? `${API}/farmer/register` : `${API}/users/register`;
+      const endpoint = form.role === 'farmer' ? `${API}/farmers/register` : `${API}/users/register`;
 
       await axios.post(endpoint, form);
       setMessage({ text: 'Registered Successfully! Redirecting to login...', type: 'success' });
