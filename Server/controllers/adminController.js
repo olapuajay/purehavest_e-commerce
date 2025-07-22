@@ -58,7 +58,7 @@ export const deleteProductByAdmin = async (req, res) => {
 
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await userModel.find();
+    const users = await userModel.find({ role: { $ne: "admin" } });
     res.status(200).json({ message: "Users List", users });
   } catch (error) {
     console.log(error);

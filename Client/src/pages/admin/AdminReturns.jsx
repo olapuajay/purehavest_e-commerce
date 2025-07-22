@@ -105,7 +105,7 @@ function AdminReturns() {
                 </ul>
               </div>
 
-              {order.returnStatus ? null : (
+              {order.returnStatus === "pending" && (
                 <div className="mt-4 flex flex-col gap-2">
                   <textarea
                     rows={2}

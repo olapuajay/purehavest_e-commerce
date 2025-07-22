@@ -64,8 +64,8 @@ function AdminOrders() {
         <div className='space-y-4'>
           {filteredOrders.map((order) => (
             <div key={order._id} className='bg-white border rounded p-4 shadow-sm'>
-              <p className='text-sm text-gray-600 mb-1'>Order ID: {orders._id}</p>
-              <p className='text-sm text-gray-600 mb-1'>User: {orders.user?.name} ({order.user?.email})</p>
+              <p className='text-sm text-gray-600 mb-1'>Order ID: {order._id}</p>
+              <p className='text-sm text-gray-600 mb-1'>User: {order.user?.name} ({order.user?.email})</p>
               <p className='text-sm text-gray-600 mb-1'>Status: <span className="capitalize font-semibold">{order.status}</span></p>
               <p className='text-sm text-gray-600 mb-1'>Created: {new Date(order.createdAt).toLocaleString()}</p>
 

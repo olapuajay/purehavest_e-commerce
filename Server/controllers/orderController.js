@@ -117,6 +117,8 @@ export const markOrderAsPaid = async (req, res) => {
 
 export const cancelOrder = async (req, res) => {
   try {
+    const { reason } = req.body;
+
     const order = await orderModel.findOne(
       { _id: req.params.id, user: req.user.id }
     );
@@ -124,7 +126,10 @@ export const cancelOrder = async (req, res) => {
     if(order.status !== "confirmed") {
       return res.status(400).json({ message: "Cannot cancel after shipped" });
     }
+
+    order.status = "cancelled";
     order.canceled = true;
+    order.cancelReason = reason || "";
     await order.save();
 
     res.status(200).json({ message: "Order cancelled successfully", order });

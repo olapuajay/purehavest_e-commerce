@@ -84,7 +84,13 @@ function Navbar() {
           <FaUser 
             className="text-xl cursor-pointer" 
             onClick={handleUserRedirect} 
-          />
+            />
+
+          {isUser && (
+            <button onClick={() => {navigate("/orders"); setMenuOpen(false);}} className='text-sm text-gray-700 hover:text-green-700 font-medium cursor-pointer'>
+              Orders
+            </button>
+          )}
 
           {!isAuthenticated ? (
             <button
@@ -134,15 +140,27 @@ function Navbar() {
             </div>
           )}
 
+
           {/* Account/Profile Link */}
           <div 
             className="flex items-center gap-2 cursor-pointer"
             onClick={handleUserRedirect}
-          >
+            >
             <FaUser className="text-xl" />
             <span>Account</span>
           </div>
 
+            {isUser && (
+              <div
+                className="flex items-center gap-2 cursor-pointer"
+                onClick={() => {
+                  navigate("/orders");
+                  setMenuOpen(false);
+                }}
+              >
+                <span>My Orders</span>
+              </div>
+            )}
           {!isAuthenticated ? (
             <button
               onClick={() => {
