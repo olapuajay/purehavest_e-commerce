@@ -217,7 +217,7 @@ function Profile() {
               <div className='flex justify-between'>
                 <div>
                   <p><span className="font-semibold">Order ID:</span> {order._id}</p>
-                  <p><span className="font-semibold">Total:</span> ₹{order.total}</p>
+                  <p><span className="font-semibold">Total:</span> ₹{order.totalAmount}</p>
                   <p><span className="font-semibold">Status:</span> <span className={`text-${order.status === 'Delivered' ? 'green' : 'orange'}-600`}>{order.status}</span></p>
                   <p><span className="font-semibold">Paid:</span> {order.isPaid ? 'Yes' : 'No'}</p>
                   <p><span className="font-semibold">Date:</span> {new Date(order.createdAt).toLocaleDateString()}</p>
