@@ -1,14 +1,14 @@
 {
-  "short_name": "ajay",
+  "short_name": "Pure Harvest",
   "name": "Pure Harvest",
   "icons": [
     {
-      "src": "icons/sun-192x192.png",
+      "src": "icons/logo-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "icons/icon-512x512.png",
+      "src": "icons/logo-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
