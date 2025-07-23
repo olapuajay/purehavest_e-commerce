@@ -7,6 +7,9 @@ function Orders() {
   const API = import.meta.env.VITE_API_URL;
 
   const [orders, setOrders] = useState([]);
+  const [showCancelDialog, setShowCancelDialog] = useState(false);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [cancelReason, setCancelReason] = useState("");
 
   useEffect(() => {
     if(token) {
@@ -19,21 +22,34 @@ function Orders() {
       const res = await axios.get(`${API}/orders/myorders`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log("Orders response: ", res.data);
       setOrders(res.data.orders || []);
     } catch (error) {
       console.log("Failed to fetch orders: ", error);
     }
   }
 
+  const cancellationReasons = [
+    "Changed my mind", "Found a better price elsewhere", "Ordered by mistake", "Item no longer needed", "Other reason"
+  ]
+
+  const handleCancelClick = (id) => {
+    setSelectedOrderId(id);
+    setShowCancelDialog(true);
+    setCancelReason("");
+  }
+
   const handleCancel = async (id) => {
-    const reason = prompt("Why are you cancelling this order?");
-    if(reason === null) return;
+    if(!cancelReason) {
+      alert("Please select a cancellation reason");
+      return;
+    }
+
     try {
-      await axios.patch(`${API}/orders/cancel/${id}`, {reason}, {
+      await axios.patch(`${API}/orders/cancel/${selectedOrderId}`, {reason: cancelReason}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchOrders();
+      setShowCancelDialog(false);
     } catch (err) {
       alert("Failed to cancel order");
     }
@@ -62,6 +78,29 @@ function Orders() {
 
   return (
     <div className='md:p-16 py-8'>
+      {showCancelDialog && (
+        <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+          <div className='bg-white p-6 rounded-lg shadow-lg max-w-md w-full'>
+            <h3 className='text-lg font-semibold mb-4'>Cancel Order</h3>
+            <p className='mb-4'>Please select the reason for cancellation:</p>
+            <select value={cancelReason} onChange={(e) => setCancelReason(e.target.value)} className='w-full p-2 border rounded mb-4'>
+              <option value="">Select a reason</option>
+              {cancellationReasons.map((reason, idx) => (
+                <option key={idx} value={reason}>{reason}</option>
+              ))}
+            </select>
+            <div className='flex justify-end space-x-3'>
+              <button
+                onClick={() => setShowCancelDialog(false)}
+                className='px-4 py-2 border rounded hover:bg-gray-100'
+              >
+                Cancel
+              </button>
+              <button onClick={handleCancel} className='px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700'>Confirm Cancellation</button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className='bg-white shadow rounded p-4 sm:p-6 mt-10'>
         <h3 className='text-lg font-semibold mb-4'>My Orders</h3>
         {orders.length === 0 ? (
@@ -88,7 +127,7 @@ function Orders() {
                   {/* Cancel */}
                   {order.status === 'confirmed' && (
                     <button
-                      onClick={() => handleCancel(order._id)}
+                      onClick={() => handleCancelClick(order._id)}
                       className="text-red-600 border border-red-600 px-3 py-1 rounded hover:bg-red-50"
                     >
                       Cancel
