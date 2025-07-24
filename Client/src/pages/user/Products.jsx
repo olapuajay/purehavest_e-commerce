@@ -59,7 +59,7 @@ const Products = () => {
       <div className="flex flex-col md:flex-row flex-1">
         {/* Sidebar */}
         
-        <aside className="w-full md:w-1/8 bg-white sticky md:top-[70px] z-10 flex flex-row md:flex-col items-center md:items-start overflow-x-auto md:overflow-y-auto md:h-[calc(100vh-70px)] md:py-4 md:m-0 mt-12">
+        <aside className="hidden md:block w-full md:w-1/8 bg-white sticky md:top-[70px] z-10 overflow-x-auto md:overflow-y-auto md:h-[calc(100vh-70px)] md:py-4 md:m-0 mt-12">
           {categories.map((cat) => (
             <button
               key={cat.name}
@@ -70,11 +70,32 @@ const Products = () => {
             >
               <div className="flex flex-col items-center">
                 <img src={cat.image} className="h-8 w- mb-1" alt={cat.name} />
-                <span className="md:text-sm text-[10px]">{cat.name}</span>
+                <span className="text-sm">{cat.name}</span>
               </div>
             </button>
           ))}
         </aside>
+
+        <div className='md:hidden flex overflow-x-auto gap-4 pb-4 scrollbar-hide scroll-smooth snap-x snap-mandatory mt-18'>
+          {categories.map((cat) => (
+          <div
+            key={cat.name}
+            className={`min-w-[120px] max-w-[160px] snap-start flex-shrink-0 bg-gray-100 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 text-center p-3 hover:cursor-pointer ${
+              selectedCategory === cat.name ? 'bg-green-300 font-semibold' : ''
+            }`}
+            onClick={() => setSelectedCategory(cat.name)}
+          >
+            <div className="h-8 flex items-center justify-center mb-2">
+              <img
+                src={cat.image}
+                alt={cat.name}
+                className="h-full w-auto object-contain rounded"
+              />
+            </div>
+            <p className="text-[10px] font-medium text-gray-800">{cat.name}</p>
+          </div>
+        ))}
+        </div>
 
         {/* Main Content */}
         <main className="flex-1 p-4 md:pt-20 overflow-x-hidden">

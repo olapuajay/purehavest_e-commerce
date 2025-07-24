@@ -3,7 +3,7 @@ import Farmerwoman from '../../../assets/farmerwoman.png';
 export default function HowItWorks() {
   return (
    <div className="bg-white py-10 px-4">
-  <h2 className="text-5xl font-semibold text-center mb-10">How it works?</h2>
+  <h2 className="md:text-4xl text-2xl font-semibold text-center mb-10">How it works?</h2>
 
   <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
     {/* For Buyers */}
@@ -21,7 +21,7 @@ export default function HowItWorks() {
       />
     </div>
     <div className="bg-[#467612] text-white rounded-lg p-8 w-full md:w-96 h-[400px] text-center relative">
-      <h3 className="text-2xl font-semibold mb-4">For Faarmers</h3>
+      <h3 className="text-2xl font-semibold mb-4">For Farmers</h3>
       <div className="text-left italic space-y-1 mb-4 text-lg">
         <p>Register →</p>
         <p>Upload</p>

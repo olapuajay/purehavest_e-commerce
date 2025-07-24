@@ -7,7 +7,7 @@ const FeaturedProducts = () => {
   const navigate = useNavigate();
   return (
     <section className="bg-white py-12 px-4 md:px-10">
-      <h2 className="text-3xl md:text-4xl font-semibold text-center mb-12">
+      <h2 className="text-2xl md:text-4xl font-semibold text-center mb-12">
         Featured Products
       </h2>
 
