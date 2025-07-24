@@ -19,8 +19,8 @@ function Cart() {
   const totalAmount = itemsTotal + deliveryFee + platformFee;
 
   return (
-    <div className="max-w-md mx-auto px-4 py-6 font-medium text-sm">
-      <p onClick={() => navigate(-1)} className="text-xs text-gray-600 cursor-pointer mb-2">&lt; Back</p>
+    <div className="max-w-md mx-auto px-4 md:pt-24 pt-18 font-medium text-sm">
+      <button onClick={() => navigate(-1)} className="text-xs text-white cursor-pointer mb-2 py-1 px-3 bg-red-500 hover:bg-red-700   rounded">Back</button>
       <h2 className="text-center text-lg mb-4 font-semibold">Order Details</h2>
       <div className="border border-gray-300 rounded-md p-4 mb-4">
         <div className="flex items-center gap-2 mb-3">
