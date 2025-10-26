@@ -103,7 +103,7 @@
 
   ## 👥 Contributors
 
- This project was developed by a team. Original contributors listed below (as found in the original README):
+ This project was developed by a team:
 
  | Name    | GitHub |
  | ------- | ------ |
@@ -140,16 +140,6 @@
 
  ## 📝 Notes & next steps
 
- - Add screenshots to `Client/public/screenshots` and reference them above.
  - Add a short demo GIF showing a user purchase flow.
  - Consider adding CONTRIBUTING.md with PR guidelines and CODE_OF_CONDUCT.md.
-
- --
-
- If you'd like, I can also:
- - Add a `LICENSE` file (MIT) and a `CONTRIBUTING.md` template
- - Create a `screenshots/` folder and add placeholder images
-
- If you want me to push more changes (screenshots, license), tell me which additional items to add and I'll implement them.
-
 
